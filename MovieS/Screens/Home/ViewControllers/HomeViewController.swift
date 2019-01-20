@@ -21,7 +21,7 @@ final class HomeViewController: UIViewController {
     //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationItem.rightBarButtonItem = viewSource.filterButton
     }
     
     override func loadView() {

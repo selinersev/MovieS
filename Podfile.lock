@@ -1,20 +1,28 @@
 PODS:
   - Alamofire (4.7.3)
   - Cartography (3.1.0)
+  - FaceAware (1.6.0)
+  - Kingfisher (4.10.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
   - Cartography
+  - FaceAware
+  - Kingfisher
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - Cartography
+    - FaceAware
+    - Kingfisher
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Cartography: 1988b7578871a56c036e7af17195cb2190edf18c
+  FaceAware: 7708f7ac2e2521f101dd1462b351c5486eb0a590
+  Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
 
-PODFILE CHECKSUM: 752247266094ef2ec8a5e2de8a09314489fd628c
+PODFILE CHECKSUM: 8f6cf62ee0aa18987dcc8cc9a090aed188f1de27
 
 COCOAPODS: 1.5.3

@@ -8,8 +8,31 @@
 
 import Cartography
 
-class HomeView: UIView {
+final class HomeView: UIView {
+    
+    //MARK: - Properties
+    private(set) lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.estimatedRowHeight = 100.0
+        tableView.sectionHeaderHeight = 55.0
+        tableView.separatorStyle = .none
+        return tableView
+    }()
 
+    private(set) lazy var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Movies"
+        searchController.dimsBackgroundDuringPresentation = false
+        tableView.tableHeaderView = searchController.searchBar
+        return searchController
+    }()
+    
+    private(set) lazy var filterButton: UIBarButtonItem = {
+        let filterButton = UIBarButtonItem()
+        return filterButton
+    }()
+    
     init() {
         super.init(frame: .zero)
     }
@@ -18,4 +41,11 @@ class HomeView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func arrangeViews() {
+        constrain(tableView) { tableView in
+            tableView.edges == inset(tableView.superview!.edges, 0, 0, 0, 0)
+        }
+    }
 }
+
+

@@ -1,5 +1,5 @@
 //
-//  MovieDetailView.swift
+//  DetailViewModel.swift
 //  MovieS
 //
 //  Created by Selin Ersev on 18.01.2019.
@@ -7,6 +7,9 @@
 //
 
 import Foundation
-import UIKit
 
-
+class DetailViewModel {
+    init() {
+        
+    }
+}
