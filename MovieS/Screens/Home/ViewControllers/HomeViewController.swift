@@ -12,11 +12,13 @@ final class HomeViewController: UIViewController {
 
     //MARK: - Properties
     private lazy var viewSource: HomeView = {
-        let view = HomeView()
-        return view
+        let viewSource = HomeView()
+        viewSource.tableView.dataSource = self as! UITableViewDataSource
+        viewSource.tableView.delegate = self as! UITableViewDelegate
+        return viewSource
     }()
     
-    let viewModel: HomeViewModel
+    private(set) var viewModel: HomeViewModel
     
     //MARK: - Life Cycle
     override func viewDidLoad() {

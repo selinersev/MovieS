@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1BA3588021EE1E57003E501B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA3587F21EE1E57003E501B /* AppDelegate.swift */; };
-		1BA3588221EE1E57003E501B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA3588121EE1E57003E501B /* ViewController.swift */; };
 		1BA3588721EE1E59003E501B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BA3588621EE1E59003E501B /* Assets.xcassets */; };
 		1BA3588A21EE1E59003E501B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BA3588821EE1E59003E501B /* LaunchScreen.storyboard */; };
 		1BA3589221EE2105003E501B /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA3589121EE2105003E501B /* Movie.swift */; };
@@ -25,7 +24,6 @@
 /* Begin PBXFileReference section */
 		1BA3587C21EE1E57003E501B /* MovieS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BA3587F21EE1E57003E501B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1BA3588121EE1E57003E501B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1BA3588621EE1E59003E501B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1BA3588921EE1E59003E501B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1BA3588B21EE1E59003E501B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -79,18 +77,8 @@
 				1BA3589B21F1D734003E501B /* Screens */,
 				1BA3589421EE2116003E501B /* Supporting Files */,
 				1BA3588B21EE1E59003E501B /* Info.plist */,
-				1BA3589321EE210D003E501B /* Models */,
-				1BA3588121EE1E57003E501B /* ViewController.swift */,
 			);
 			path = MovieS;
-			sourceTree = "<group>";
-		};
-		1BA3589321EE210D003E501B /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				1BA3589121EE2105003E501B /* Movie.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		1BA3589421EE2116003E501B /* Supporting Files */ = {
@@ -136,8 +124,8 @@
 			children = (
 				1BA358AF21F2102F003E501B /* ViewModels */,
 				1BA358AE21F21020003E501B /* ViewControllers */,
-				1BA358AD21F2101A003E501B /* Models */,
 				1BA358AC21F21013003E501B /* Views */,
+				1BA358AD21F2101A003E501B /* Models */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -161,6 +149,7 @@
 		1BA358A121F1D793003E501B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1BA3589121EE2105003E501B /* Movie.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -177,6 +166,9 @@
 		1BA358AB21F2038E003E501B /* Filter */ = {
 			isa = PBXGroup;
 			children = (
+				1BA358B921F5AE86003E501B /* Models */,
+				1BA358B821F5AE7B003E501B /* ViewModels */,
+				1BA358B721F5AE6C003E501B /* ViewControllers */,
 				1BA358B221F248CF003E501B /* Views */,
 			);
 			path = Filter;
@@ -218,6 +210,27 @@
 			children = (
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		1BA358B721F5AE6C003E501B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		1BA358B821F5AE7B003E501B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		1BA358B921F5AE86003E501B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		A7ABC6105912598C738A5B87 /* Pods */ = {
@@ -368,7 +381,6 @@
 				1BA358AA21F1F564003E501B /* MovieCell.swift in Sources */,
 				1BA358B421F248E6003E501B /* DetailViewModel.swift in Sources */,
 				1BA358A621F1D821003E501B /* HomeViewModel.swift in Sources */,
-				1BA3588221EE1E57003E501B /* ViewController.swift in Sources */,
 				1BA358B621F24924003E501B /* DetailViewController.swift in Sources */,
 				1BA3588021EE1E57003E501B /* AppDelegate.swift in Sources */,
 				1BA3589221EE2105003E501B /* Movie.swift in Sources */,

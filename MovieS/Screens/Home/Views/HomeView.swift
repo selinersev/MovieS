@@ -16,6 +16,7 @@ final class HomeView: UIView {
         tableView.estimatedRowHeight = 100.0
         tableView.sectionHeaderHeight = 55.0
         tableView.separatorStyle = .none
+        tableView.register(MovieCell.self, forCellReuseIdentifier: "MovieCell")
         return tableView
     }()
 
@@ -35,12 +36,16 @@ final class HomeView: UIView {
     
     init() {
         super.init(frame: .zero)
+        addSubview(tableView)
+        arrangeViews()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    //MARK: - Arrange Views
     private func arrangeViews() {
         constrain(tableView) { tableView in
             tableView.edges == inset(tableView.superview!.edges, 0, 0, 0, 0)
