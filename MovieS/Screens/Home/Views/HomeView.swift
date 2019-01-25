@@ -13,10 +13,10 @@ final class HomeView: UIView {
     //MARK: - Properties
     private(set) lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.estimatedRowHeight = 100.0
-        tableView.sectionHeaderHeight = 55.0
-        tableView.separatorStyle = .none
-        tableView.register(MovieCell.self, forCellReuseIdentifier: "MovieCell")
+        tableView.estimatedRowHeight = 50.0
+        tableView.rowHeight = UITableView.automaticDimension
+        //tableView.separatorStyle = .none
+        tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "MovieCell")
         return tableView
     }()
 
@@ -25,7 +25,6 @@ final class HomeView: UIView {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Movies"
         searchController.dimsBackgroundDuringPresentation = false
-        tableView.tableHeaderView = searchController.searchBar
         return searchController
     }()
     
@@ -34,6 +33,7 @@ final class HomeView: UIView {
         return filterButton
     }()
     
+    // MARK: - Initialization
     init() {
         super.init(frame: .zero)
         addSubview(tableView)

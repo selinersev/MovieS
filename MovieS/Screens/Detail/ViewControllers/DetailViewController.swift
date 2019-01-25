@@ -7,16 +7,35 @@
 //
 
 import UIKit
+import Kingfisher
+import FaceAware
 
 class DetailViewController: UIViewController {
-
+    
+    //MARK: - Properties
+    private lazy var viewSource: DetailView = {
+        let viewSource = DetailView()
+        return viewSource
+    }()
+    
+    private(set) var viewModel: DetailViewModel
+    
+    var movie = Movie(id: 0, title: "", overview: "", posterPath: "", releaseDate: Date(), voteAverage: 0.0, popularity: 0.0)
+    
+    //MARK: - Life Cycle
+    override func loadView() {
+        self.view = viewSource
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        viewSource.overviewLabel.text = viewModel.overview
+        viewSource.populateUI(movie: movie)
     }
 
+    // MARK: - Initialization
     init() {
+        viewModel = DetailViewModel(movie: movie)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -24,3 +43,15 @@ class DetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+//extension DetailViewController: MovieDetailDelegate{
+//    func sendData(movie: Movie) {
+//        self.movie.id = movie.id
+//        self.movie.genreIDs = movie.genreIDs
+//        self.movie.overview = movie.overview
+//        self.movie.popularity = movie.popularity
+//        self.movie.posterPath = movie.posterPath
+//    }
+//
+//
+//}

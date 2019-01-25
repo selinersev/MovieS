@@ -15,7 +15,7 @@ struct Movie: Codable {
     var posterPath: String?
     var overview: String?
     var releaseDate: Date?
-    var genreIDs: [Int]?
+    //var genreIDs: [Int]?
     var voteAverage: Double?
     var popularity: Double?
     
@@ -33,7 +33,7 @@ struct Movie: Codable {
         case id, title, overview, popularity
         case posterPath = "poster_path"
         case releaseDate = "release_date"
-        case genreIDs = "genre_ids"
+        //case genreIDs = "genre_ids"
         case voteAverage = "vote_average"
     }
 }
