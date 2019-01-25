@@ -29,6 +29,7 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = #colorLiteral(red: 0.337254902, green: 0.337254902, blue: 0.337254902, alpha: 1)
         viewSource.overviewLabel.text = viewModel.overview
         viewSource.populateUI(movie: movie)
     }

@@ -16,12 +16,17 @@ class MovieTableViewCell: UITableViewCell {
     //MARK: - Properties
     private lazy var movieImage: UIImageView = {
         let movieImage = UIImageView()
+        movieImage.layer.masksToBounds = true
+        movieImage.layer.cornerRadius = 5
+        movieImage.layer.shadowRadius = 10
+        movieImage.layer.shadowColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         return movieImage
     }()
     
     private lazy var movieLabel: UILabel = {
         let movieLabel = UILabel()
-        movieLabel.font = UIFont(name: "System", size: 25)
+        movieLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        movieLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.bold)
         return movieLabel
     }()
     
@@ -30,7 +35,7 @@ class MovieTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         selectionStyle = .default
-        backgroundColor = .white
+        backgroundColor = #colorLiteral(red: 0.337254902, green: 0.337254902, blue: 0.337254902, alpha: 1)
         
         addSubview(movieLabel)
         addSubview(movieImage)
@@ -51,12 +56,13 @@ class MovieTableViewCell: UITableViewCell {
             movieImage.top == movieImage.superview!.top + 15
             movieImage.bottom == movieImage.superview!.bottom - 15
             movieImage.centerY == movieImage.superview!.centerY
-            movieImage.leading == movieImage.superview!.leading + 25
-            movieImage.width == 40
-            movieImage.height == 50
+            movieImage.leading == movieImage.superview!.leading + 35
+            movieImage.width == 80
+            movieImage.height == 100
             movieLabel.leading == movieImage.trailing + 50
             movieLabel.trailing == movieLabel.superview!.trailing - 25
-            movieLabel.centerY == movieLabel.superview!.centerY
+            movieLabel.top == movieImage.top + 10
+            //movieLabel.centerY == movieLabel.superview!.centerY
         }
     }
     
