@@ -29,14 +29,12 @@ final class HomeView: UIView {
         searchController.searchBar.placeholder = "Search Movies"
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.barTintColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        let cancelButtonAttributes = [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.2745098039, green: 0.7882352941, blue: 0.7019607843, alpha: 1) ]
+        UIBarButtonItem.appearance().setTitleTextAttributes(cancelButtonAttributes , for: .normal)
+        searchController.searchBar.setTextColor(color: .white) // ????
         return searchController
     }()
     
-    private(set) lazy var filterButton: UIBarButtonItem = {
-        let filterButton = UIBarButtonItem()
-        filterButton.image = #imageLiteral(resourceName: "filterApllied")
-        return filterButton
-    }()
     
     // MARK: - Initialization
     init() {
@@ -59,3 +57,11 @@ final class HomeView: UIView {
 }
 
 
+public extension UISearchBar {
+    
+    public func setTextColor(color: UIColor) {
+        let svs = subviews.flatMap { $0.subviews }
+        guard let tf = (svs.filter { $0 is UITextField }).first as? UITextField else { return }
+        tf.textColor = color
+    }
+}

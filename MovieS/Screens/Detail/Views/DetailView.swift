@@ -27,6 +27,7 @@ final class DetailView: UIView {
         let titleLabel = UILabel()
         let font: UIFont = .boldSystemFont(ofSize: 22.0)
         titleLabel.font = font
+        titleLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         return titleLabel
     }()
     
@@ -41,11 +42,13 @@ final class DetailView: UIView {
         let rateLabel = UILabel()
         let font: UIFont = .boldSystemFont(ofSize: 20.0)
         rateLabel.font = font
+        rateLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         return rateLabel
     }()
     
     private(set) lazy var overviewLabel: UILabel = {
         let overviewLabel = UILabel()
+        overviewLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         return overviewLabel
     }()
     
@@ -54,7 +57,7 @@ final class DetailView: UIView {
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
         stackView.alignment = .fill
-        stackView.spacing = 25
+        stackView.spacing = 10
         return stackView
     }()
     
@@ -74,9 +77,9 @@ final class DetailView: UIView {
         constrain(stackView, poster) { stackView, poster in
        
             stackView.leading == stackView.superview!.leading + 25
-            stackView.top == poster.bottom - 25
+            stackView.top == poster.bottom + 40
             stackView.trailing == stackView.superview!.trailing - 25
-            stackView.bottom == stackView.superview!.bottom + 50
+            //stackView.bottom == stackView.superview!.bottom + 50
             poster.leading == poster.superview!.leading + 25
             poster.trailing == poster.superview!.trailing - 25
             poster.top == poster.superview!.top + 100

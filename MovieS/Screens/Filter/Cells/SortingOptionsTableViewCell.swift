@@ -30,37 +30,38 @@ final class SortingOptionsTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView.init(arrangedSubviews: [sortingIcon,sortingNameLabel])
-        stackView.axis = .horizontal
-        stackView.spacing = 5.0
-        stackView.distribution = .fillEqually
-        stackView.alignment = .fill
-        return stackView
-    }()
+    private lazy var stackView = UIStackView.create(arrangedSubViews: [sortingIcon, sortingNameLabel],
+                                                    axis: .horizontal,
+                                                    spacing: 10.0)
     
     // MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         selectionStyle = .default
-        backgroundColor = .white
+        backgroundColor = #colorLiteral(red: 0.337254902, green: 0.337254902, blue: 0.337254902, alpha: 1)
         
         addSubview(stackView)
-        constrain(stackView, block: { $0.edges == $0.superview!.edges.inseted(by: 15.0) })
+        arrangeViews()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
+    //MARK - Arange Views
+    private func arrangeViews() {
+        constrain(stackView) { stackView in
+            stackView.left == stackView.superview!.left + 15.0
+            stackView.right == stackView.superview!.right - 15.0
+            stackView.top == stackView.superview!.top + 10.0
+            stackView.bottom == stackView.superview!.bottom - 10.0
+        }
     }
-    
     //MARK: - PopulateUI
-    func populate(with sortingOption: String) {
-        sortingNameLabel.text = sortingOption
+    func populate(with type: RowType) {
+        sortingNameLabel.text = type.rowName
+        
     }
     
 }

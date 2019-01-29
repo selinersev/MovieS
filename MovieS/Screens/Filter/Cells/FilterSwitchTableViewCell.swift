@@ -25,15 +25,17 @@ final class FilterSwitchTableViewCell: UITableViewCell {
         return genreLabel
     }()
     
+    private lazy var stackView = UIStackView.create(arrangedSubViews: [genreLabel, filterSwitch],
+                                                    axis: .horizontal,
+                                                    spacing: 10.0)
     // MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        selectionStyle = .default
-        backgroundColor = .white
+        selectionStyle = .none
+        backgroundColor = #colorLiteral(red: 0.337254902, green: 0.337254902, blue: 0.337254902, alpha: 1)
         
-        addSubview(filterSwitch)
-        addSubview(genreLabel)
+        addSubview(stackView)
         arrangeViews()
 
     }
@@ -42,15 +44,19 @@ final class FilterSwitchTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-    }
-    
     //MARK - Arange Views
     private func arrangeViews() {
-        constrain(filterSwitch, genreLabel) { filterSwitch, genreLabel in
-            
+        constrain(stackView) { stackView in
+            stackView.left == stackView.superview!.left + 15.0
+            stackView.right == stackView.superview!.right - 15.0
+            stackView.top == stackView.superview!.top + 10.0
+            stackView.bottom == stackView.superview!.bottom - 10.0
         }
+    }
+    //MARK: - PopulateUI
+    func populate(with type: RowType) {
+        genreLabel.text = type.rowName
     }
     
 }
+
