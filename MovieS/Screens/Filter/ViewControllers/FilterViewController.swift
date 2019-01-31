@@ -39,13 +39,9 @@ final class FilterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    func dummyDatasource()->[String] {
-        var arr = [String]()
-        arr = ["Action","Advanture", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "History", "Horror", "Music", "Mystery", "Romance", "Science Fiction", "TV Movie", "Thriller", "War", "Western"]
-        return arr
-    }
+        viewModel.fetchGenres()
+    }    
+
 }
 
 extension FilterViewController: UITableViewDataSource{
@@ -84,7 +80,7 @@ extension FilterViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.changeSortingField()
-        delegate?.sendData(soringType: viewModel.getSelectedSortingType())
+        //delegate?.sendData(soringType: viewModel.getSelectedSortingType())
         tableView.reloadData()
     }
 }

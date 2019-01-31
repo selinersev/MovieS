@@ -17,7 +17,8 @@ final class FilterViewModel {
     }
 
     private var sortings:[SortingType] = [.byRate,.byReleaseDate,.byPopularity]
-    private var genres = [MovieKind]()
+    private let urlString = "https://api.themoviedb.org/3/genre/list?api_key=fc918650eaa758b58bf5cfbfe3178e44"
+    private var genreListData: genreList?
     private var selectedIndex = 0
     
     func getSelectedSortingType() -> SortingType{
@@ -29,14 +30,16 @@ final class FilterViewModel {
         return sections[section]
     }
     
-    func getGenre(for indexPath: IndexPath) -> MovieKind? {
-        guard genres.count > indexPath.row else {return nil}
-        return genres[indexPath.row]
+    func getGenre(for indexPath: IndexPath) -> MovieGenre? {
+        guard let genresCount = genreListData?.genres.count else {return nil}
+        guard genresCount > indexPath.row else {return nil}
+        return genreListData?.genres[indexPath.row]
     }
     
     func getRowCount(for section: Int) ->Int{
+        guard let genresCount = genreListData?.genres.count else {return 0}
         guard let type = getSectionType(at: section) else {return 0}
-        return type == .sortingSection ? 1 : genres.count
+        return type == .sortingSection ? 1 : genresCount
     }
 
     func changeSortingField() {
@@ -45,6 +48,23 @@ final class FilterViewModel {
         }else{
             selectedIndex += 1
         }
+    }
+    
+    func fetchGenres() {
+        guard let url = URL(string: urlString) else {return}
+        URLSession.shared.dataTask(with: url){(data,response,err) in
+            guard let data = data else { return }
+            print(String(data: data, encoding: String.Encoding.utf8))
+            do {
+                self.genreListData = try JSONDecoder().decode(genreList.self, from: data)
+                DispatchQueue.main.async { [weak self] in
+                    //tableView.reloadData()
+                }
+            }catch let jsonErr {
+                print("Error serializing json:",jsonErr)
+            }
+            
+            }.resume()
     }
 }
 

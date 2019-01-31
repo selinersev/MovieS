@@ -16,7 +16,7 @@ final class SortingOptionsTableViewCell: UITableViewCell {
         sortingIcon.image = #imageLiteral(resourceName: "sort")
         sortingIcon.contentMode = .left
         constrain(sortingIcon, block: {
-            $0.height == 16
+            $0.height == 18
             $0.width == 14
         })
         return sortingIcon
@@ -24,7 +24,7 @@ final class SortingOptionsTableViewCell: UITableViewCell {
     
     private lazy var sortingNameLabel: UILabel = {
         let label = UILabel()
-        let font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
+        let font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.medium)
         label.font = font
         label.textAlignment = .left
         return label

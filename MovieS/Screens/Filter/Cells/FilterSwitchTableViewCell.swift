@@ -52,7 +52,7 @@ final class FilterSwitchTableViewCell: UITableViewCell {
     }
     
     //MARK: - PopulateUI
-    func populate(with type: MovieKind) {
+    func populate(with type: MovieGenre) {
         genreLabel.text = type.name
     }
     

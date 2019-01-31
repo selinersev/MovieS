@@ -8,13 +8,16 @@
 
 import Foundation
 
-
-struct MovieKind {
-    let name:String
-    let id:Int
-    
+struct genreList: Codable {
+    let genres: [MovieGenre]
 }
 
-final class FilterModel {
+struct MovieGenre: Codable {
+    let id: Int
+    let name: String
     
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case name = "name"
+    }
 }
