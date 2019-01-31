@@ -78,11 +78,11 @@ extension UIImageView: Attachable {
 
     private func setImageAndFocusOnFaces(image: UIImage?) {
         DispatchQueue.global(qos: .default).async {
-            guard let image = image else {
+            guard let image = image, let cgImg = image.cgImage else {
                 return
             }
 
-            let cImage = image.ciImage ?? CIImage(cgImage: image.cgImage!)
+            let cImage = image.ciImage ?? CIImage(cgImage: cgImg)
 
             let detector = CIDetector(ofType: CIDetectorTypeFace, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyLow])
             let features = detector!.features(in: cImage)

@@ -11,7 +11,7 @@ import Cartography
 import Kingfisher
 import FaceAware
 
-class MovieTableViewCell: UITableViewCell {
+final class MovieTableViewCell: UITableViewCell {
     
     //MARK: - Properties
     private lazy var movieImage: UIImageView = {

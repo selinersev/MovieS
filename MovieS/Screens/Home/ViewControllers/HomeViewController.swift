@@ -8,7 +8,7 @@
 
 import Cartography
 
-final class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController, FilterViewControllerDelegate {
 
     //MARK: - Properties
     private lazy var viewSource: HomeView = {
@@ -26,9 +26,23 @@ final class HomeViewController: UIViewController {
     private(set) var viewModel: HomeViewModel
     
     var movies = [Movie]()
-    //weak var delegate: MovieDetailDelegate?
+    let controller = FilterViewController()
+    
+    // MARK: - Initialization
+    init() {
+        viewModel = HomeViewModel(id: 0, title: "", overview: "", posterPath: "", releaseDate: Date(), voteAverage: 0.0, popularity: 0.0)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - Life Cycle
+    override func loadView() {
+        self.view = viewSource
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = filterButton
@@ -39,23 +53,9 @@ final class HomeViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.2745098039, green: 0.7882352941, blue: 0.7019607843, alpha: 1),NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.bold)]
         movies = dummyDatasource()
     }
-    
-    override func loadView() {
-        self.view = viewSource
-    }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         viewSource.tableView.reloadData()
-    }
-    
-    // MARK: - Initialization
-    init() {
-        viewModel = HomeViewModel(id: 0, title: "", overview: "", posterPath: "", releaseDate: Date(), voteAverage: 0.0, popularity: 0.0)
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     func dummyDatasource()->[Movie] {
@@ -67,10 +67,15 @@ final class HomeViewController: UIViewController {
         return arr
     }
     
+    func sendData(soringType: SortingType) {
+        //.............
+    }
+    
+
     @objc func filter() {
         let filterViewController = FilterViewController()
         navigationController?.pushViewController(filterViewController, animated: true)
-        //filterViewController.delegate = self
+        controller.delegate = self
     }
 }
 
@@ -91,7 +96,6 @@ extension HomeViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let controller = DetailViewController()
         navigationController?.pushViewController(controller, animated: true)
-        //delegate?.sendData(movie: movies[indexPath.row])
         controller.movie = movies[indexPath.row]
     }
 }

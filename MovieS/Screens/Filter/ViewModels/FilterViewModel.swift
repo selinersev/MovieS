@@ -10,45 +10,47 @@ import Foundation
 import UIKit
 
 final class FilterViewModel {
+    
+    //MARK: - Properties
     var sections: [SectionType] {
         return [.sortingSection, .filterSection]
     }
+
+    private var sortings:[SortingType] = [.byRate,.byReleaseDate,.byPopularity]
+    private var genres = [MovieKind]()
+    private var selectedIndex = 0
+    
+    func getSelectedSortingType() -> SortingType{
+        return sortings[selectedIndex]
+    }
+    
     func getSectionType(at section: Int) -> SectionType? {
         guard section < sections.count else {return nil}
         return sections[section]
     }
-    func getRowType(indexPath: IndexPath) -> RowType? {
-        guard let sectionType = getSectionType(at: indexPath.section) else {return nil}
-        return sectionType.rows[indexPath.row]
-        
-    }
-}
-enum RowType {
-    case sorting, comedy, war, romance
-    var footerButtonTitle: String {
-        return "Filtreleri Uygula"
+    
+    func getGenre(for indexPath: IndexPath) -> MovieKind? {
+        guard genres.count > indexPath.row else {return nil}
+        return genres[indexPath.row]
     }
     
-    var rowName: String {
-        switch self {
-        case .sorting: return "Sıralama"
-        case .comedy: return "Comedy"
-        case .war: return "War"
-        case .romance: return "Romance"
+    func getRowCount(for section: Int) ->Int{
+        guard let type = getSectionType(at: section) else {return 0}
+        return type == .sortingSection ? 1 : genres.count
+    }
+
+    func changeSortingField() {
+        if selectedIndex == sortings.count - 1  {
+            selectedIndex = 0
+        }else{
+            selectedIndex += 1
         }
     }
 }
+
+// MARK: - Enums
 enum SectionType {
     case sortingSection, filterSection
-    
-    var rows: [RowType] {
-        switch self {
-        case .sortingSection:
-            return [.sorting]
-        case .filterSection:
-            return [.comedy, .war, .romance]
-        }
-    }
     
     var sectionHeaderHeight: CGFloat {
         switch self {
@@ -63,6 +65,28 @@ enum SectionType {
         switch self {
         case .sortingSection: return "Sırala"
         case .filterSection: return "Filtrele"
+        }
+    }
+}
+
+enum SortingType{
+    case byRate,byReleaseDate,byPopularity
+    var name:String{
+        switch self {
+        case .byRate:
+            return "By Rate"
+        case .byReleaseDate:
+            return "By Release Date"
+        case .byPopularity:
+            return "By Popularity"
+        }
+    }
+    var serviceParam:String{
+        switch self {
+        case .byPopularity:
+            return "popularity.desc"
+        default:
+            return ""
         }
     }
 }

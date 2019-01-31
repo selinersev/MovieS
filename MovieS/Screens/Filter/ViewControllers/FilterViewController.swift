@@ -20,7 +20,7 @@ final class FilterViewController: UIViewController {
     
     private var viewModel: FilterViewModel
     
-    private var genres = [String]()
+    weak var delegate: FilterViewControllerDelegate?
     
     // MARK: - Initialization
     init() {
@@ -37,10 +37,8 @@ final class FilterViewController: UIViewController {
         view = viewSource
     }
     
-    //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        genres = dummyDatasource()
     }
     
     func dummyDatasource()->[String] {
@@ -51,33 +49,46 @@ final class FilterViewController: UIViewController {
 }
 
 extension FilterViewController: UITableViewDataSource{
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.sections.count
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.sections[section].rows.count
+        return viewModel.getRowCount(for: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let rowType = viewModel.getRowType(indexPath: indexPath) else  {
-            return UITableViewCell()
-        }
-        
-        switch rowType {
-        case .comedy, .romance, .war:
-            let cell: FilterSwitchTableViewCell = tableView.dequeueReusableCell(withIdentifier: "FilterSwitchCell", for: indexPath) as! FilterSwitchTableViewCell
-            cell.populate(with: rowType)
-            return cell
-        case .sorting:
+        guard let sectionType = viewModel.getSectionType(at: indexPath.section) else {return UITableViewCell()}
+        switch sectionType {
+        case .sortingSection:
             let cell: SortingOptionsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "SortingCell", for: indexPath) as! SortingOptionsTableViewCell
-            cell.populate(with: rowType)
+            cell.populate(sortingOption: viewModel.getSelectedSortingType())
+            return cell
+        case .filterSection:
+            let cell: FilterSwitchTableViewCell = tableView.dequeueReusableCell(withIdentifier: "FilterSwitchCell", for: indexPath) as! FilterSwitchTableViewCell
+            guard let genre = viewModel.getGenre(for: indexPath) else {return UITableViewCell()}
+            cell.populate(with: genre)
             return cell
         }
+
     }
+
 }
 
 extension FilterViewController: UITableViewDelegate{
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return viewModel.sections[section].sectionHeaderHeight
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.changeSortingField()
+        delegate?.sendData(soringType: viewModel.getSelectedSortingType())
+        tableView.reloadData()
+    }
+}
+
+protocol FilterViewControllerDelegate: class{
+    func sendData(soringType: SortingType)
 }

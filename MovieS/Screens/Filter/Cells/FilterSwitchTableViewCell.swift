@@ -20,10 +20,7 @@ final class FilterSwitchTableViewCell: UITableViewCell {
         return filterSwitch
     }()
     
-    private lazy var genreLabel: UILabel = {
-        let genreLabel = UILabel()
-        return genreLabel
-    }()
+    private lazy var genreLabel = UILabel()
     
     private lazy var stackView = UIStackView.create(arrangedSubViews: [genreLabel, filterSwitch],
                                                     axis: .horizontal,
@@ -53,9 +50,10 @@ final class FilterSwitchTableViewCell: UITableViewCell {
             stackView.bottom == stackView.superview!.bottom - 10.0
         }
     }
+    
     //MARK: - PopulateUI
-    func populate(with type: RowType) {
-        genreLabel.text = type.rowName
+    func populate(with type: MovieKind) {
+        genreLabel.text = type.name
     }
     
 }

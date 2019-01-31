@@ -59,9 +59,8 @@ final class SortingOptionsTableViewCell: UITableViewCell {
         }
     }
     //MARK: - PopulateUI
-    func populate(with type: RowType) {
-        sortingNameLabel.text = type.rowName
-        
+    func populate(sortingOption: SortingType){
+        sortingNameLabel.text = sortingOption.name
     }
     
 }

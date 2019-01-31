@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 import FaceAware
 
-class DetailViewController: UIViewController {
+final class DetailViewController: UIViewController {
     
     //MARK: - Properties
     private lazy var viewSource: DetailView = {
@@ -45,14 +45,4 @@ class DetailViewController: UIViewController {
     }
 }
 
-//extension DetailViewController: MovieDetailDelegate{
-//    func sendData(movie: Movie) {
-//        self.movie.id = movie.id
-//        self.movie.genreIDs = movie.genreIDs
-//        self.movie.overview = movie.overview
-//        self.movie.popularity = movie.popularity
-//        self.movie.posterPath = movie.posterPath
-//    }
-//
-//
-//}
+

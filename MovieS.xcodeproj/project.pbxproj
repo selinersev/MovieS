@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B6291162201DAF900BEA104 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6291152201DAF900BEA104 /* FilterModel.swift */; };
 		1BA3588021EE1E57003E501B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA3587F21EE1E57003E501B /* AppDelegate.swift */; };
 		1BA3588721EE1E59003E501B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BA3588621EE1E59003E501B /* Assets.xcassets */; };
 		1BA3588A21EE1E59003E501B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BA3588821EE1E59003E501B /* LaunchScreen.storyboard */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B6291152201DAF900BEA104 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
 		1BA3587C21EE1E57003E501B /* MovieS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BA3587F21EE1E57003E501B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BA3588621EE1E59003E501B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 		1BA358B921F5AE86003E501B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1B6291152201DAF900BEA104 /* FilterModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 				1BA358A421F1D7C0003E501B /* HomeViewController.swift in Sources */,
 				1BB5F6BD21FF2C660075D567 /* UIStackViewExtension.swift in Sources */,
 				1BA358B121F21072003E501B /* DetailView.swift in Sources */,
+				1B6291162201DAF900BEA104 /* FilterModel.swift in Sources */,
 				1BA358A821F1D856003E501B /* HomeView.swift in Sources */,
 				1BB5F6B721FAFE350075D567 /* FilterSwitchTableViewCell.swift in Sources */,
 				1BA358AA21F1F564003E501B /* MovieTableViewCell.swift in Sources */,

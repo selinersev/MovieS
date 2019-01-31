@@ -8,14 +8,14 @@
 
 import Foundation
 
-class HomeViewModel {
+final class HomeViewModel {
     
-    private(set) var id: Int
-    private(set) var overview: String
-    private(set) var posterPath: String
-    private(set) var releaseDate: Date
-    private(set) var voteAverage: Double
-    private(set) var popularity: Double
+    private var id: Int
+    private var overview: String
+    private var posterPath: String
+    private var releaseDate: Date
+    private var voteAverage: Double
+    private var popularity: Double
     
     init(id: Int,
          title: String,
