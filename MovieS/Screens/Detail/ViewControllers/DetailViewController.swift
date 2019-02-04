@@ -20,7 +20,7 @@ final class DetailViewController: UIViewController {
     
     private(set) var viewModel: DetailViewModel
     
-    var movie: Movie?
+    private var movie: Movie?
     
     //MARK: - Life Cycle
     override func loadView() {
@@ -34,7 +34,8 @@ final class DetailViewController: UIViewController {
     }
 
     // MARK: - Initialization
-    init() {
+    init(with movie: Movie) {
+        self.movie = movie
         viewModel = DetailViewModel()
         super.init(nibName: nil, bundle: nil)
     }

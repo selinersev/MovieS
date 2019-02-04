@@ -25,7 +25,6 @@ final class HomeViewController: UIViewController, FilterViewControllerDelegate {
     
     private(set) var viewModel: HomeViewModel
     
-    let controller = FilterViewController()
     
     // MARK: - Initialization
     init() {
@@ -44,19 +43,13 @@ final class HomeViewController: UIViewController, FilterViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.rightBarButtonItem = filterButton
-        navigationItem.searchController = viewSource.searchController
-        self.title = "MovieS"
-        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2431372549, green: 0.2431372549, blue: 0.2431372549, alpha: 1)
-        self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.2745098039, green: 0.7882352941, blue: 0.7019607843, alpha: 1)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.2745098039, green: 0.7882352941, blue: 0.7019607843, alpha: 1),NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.bold)]
         
-        viewModel.fetchGenres { [weak self] data in
+        setUpNavBar()
+        viewModel.fetchMovies { [weak self] data in
             guard self == self else {return}
             DispatchQueue.main.async {
                 self?.viewSource.tableView.reloadData()
             }
-            
         }
     }
 
@@ -68,11 +61,19 @@ final class HomeViewController: UIViewController, FilterViewControllerDelegate {
         //.............
     }
     
+    func setUpNavBar(){
+        navigationItem.rightBarButtonItem = filterButton
+        navigationItem.searchController = viewSource.searchController
+        self.title = "MovieS"
+        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2431372549, green: 0.2431372549, blue: 0.2431372549, alpha: 1)
+        self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.2745098039, green: 0.7882352941, blue: 0.7019607843, alpha: 1)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.2745098039, green: 0.7882352941, blue: 0.7019607843, alpha: 1),NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.bold)]
+    }
 
     @objc func filter() {
         let filterViewController = FilterViewController()
         navigationController?.pushViewController(filterViewController, animated: true)
-        controller.delegate = self
+        filterViewController.delegate = self
     }
 }
 
@@ -92,9 +93,9 @@ extension HomeViewController: UITableViewDataSource{
 
 extension HomeViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let controller = DetailViewController()
-        navigationController?.pushViewController(controller, animated: true)
+       
         guard let movie = viewModel.getMovie(for: indexPath) else {return}
-        controller.movie = movie
+         let controller = DetailViewController(with: movie)
+        navigationController?.pushViewController(controller, animated: true)
     }
 }

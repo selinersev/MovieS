@@ -17,9 +17,9 @@ extension UIStackView {
                        spacing: CGFloat = .leastNormalMagnitude) -> UIStackView {
         
         let stackView = UIStackView(arrangedSubviews: arrangedSubViews)
-        stackView.axis = axis
-        stackView.alignment = alignment
-        stackView.distribution = distribution
+        stackView.axis = axis //vertical, horizontal
+        stackView.alignment = alignment //arranged subviews perpendicular to the stack view’s axis
+        stackView.distribution = distribution //arranged views along the stack view’s axis
         stackView.spacing = spacing
         return stackView
     }

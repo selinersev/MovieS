@@ -9,7 +9,6 @@
 import UIKit
 import Cartography
 import Kingfisher
-import FaceAware
 
 final class MovieTableViewCell: UITableViewCell {
     
@@ -34,7 +33,7 @@ final class MovieTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        selectionStyle = .default
+        selectionStyle = .none
         backgroundColor = #colorLiteral(red: 0.337254902, green: 0.337254902, blue: 0.337254902, alpha: 1)
         
         addSubview(movieLabel)
@@ -62,19 +61,16 @@ final class MovieTableViewCell: UITableViewCell {
             movieLabel.leading == movieImage.trailing + 50
             movieLabel.trailing == movieLabel.superview!.trailing - 25
             movieLabel.top == movieImage.top + 10
-            //movieLabel.centerY == movieLabel.superview!.centerY
         }
     }
     
     // MARK: - Populate UI
     func populateUI(movie: Movie){
         movieLabel.text = movie.title
-        guard let x = movie.posterPath else {return}
-        if let url = URL(string: x){
-            movieImage.kf.setImage(with: url, placeholder: UIImage(), options: nil, progressBlock: nil) { (image, error, cacheType, url) in
-                self.movieImage.clipsToBounds = true
-                self.movieImage.focusOnFaces = true
-            }
+        guard let urlString = movie.thumbImageURL, let url = URL(string: urlString) else {return}
+        movieImage.kf.indicatorType = .activity
+        movieImage.kf.setImage(with: url, placeholder: UIImage(), options: nil, progressBlock: nil) { (image, error, cacheType, url) in
+            self.movieImage.clipsToBounds = true
         }
     }
 }

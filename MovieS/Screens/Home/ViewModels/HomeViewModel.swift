@@ -24,7 +24,7 @@ final class HomeViewModel {
         return movieListData?.movies[indexPath.row]
     }
     
-    func fetchGenres( dataFetched: @escaping ([Movie]?) -> () ) {
+    func fetchMovies( dataFetched: @escaping ([Movie]?) -> () ) {
         guard let url = URL(string: urlString) else {return}
         URLSession.shared.dataTask(with: url){(data,response,err) in
             guard let data = data else { return }

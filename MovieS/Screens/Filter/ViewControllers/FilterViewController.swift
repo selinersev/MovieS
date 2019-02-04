@@ -44,7 +44,6 @@ final class FilterViewController: UIViewController {
             DispatchQueue.main.async {
                 self?.viewSource.tableView.reloadData()
             }
-            
         }
     }
 
@@ -65,7 +64,7 @@ extension FilterViewController: UITableViewDataSource{
         switch sectionType {
         case .sortingSection:
             let cell: SortingOptionsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "SortingCell", for: indexPath) as! SortingOptionsTableViewCell
-            cell.populate(sortingOption: viewModel.getSelectedSortingType())
+            cell.populate(sortingOption: viewModel.selectedSortingType)
             return cell
         case .filterSection:
             let cell: FilterSwitchTableViewCell = tableView.dequeueReusableCell(withIdentifier: "FilterSwitchCell", for: indexPath) as! FilterSwitchTableViewCell
@@ -84,10 +83,13 @@ extension FilterViewController: UITableViewDelegate{
         return viewModel.sections[section].sectionHeaderHeight
     }
     
-    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 20))
+        headerView.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        return headerView
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.reloadData()
         guard let sectionType = viewModel.getSectionType(at: indexPath.section) else {return}
         switch sectionType {
         case .sortingSection:
@@ -95,9 +97,9 @@ extension FilterViewController: UITableViewDelegate{
             //delegate?.sendData(soringType: viewModel.getSelectedSortingType())
            
         case .filterSection:
-            delegate?.sendData(soringType: viewModel.getSelectedSortingType())
+            return
         }
-
+        tableView.reloadData()
     }
 }
 

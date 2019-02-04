@@ -10,18 +10,31 @@ import Foundation
 
 struct MovieList: Codable {
     let movies: [Movie]
+    enum CodingKeys: String, CodingKey {
+        case movies = "results"
+    }
 }
 
 struct Movie: Codable {
     
     var id: Int
     var title: String
-    var posterPath: String?
+    private var posterPath: String?
     var overview: String?
-    var releaseDate: Date?
+    var releaseDate: String?
     //var genreIDs: [Int]?
     var voteAverage: Double?
     var popularity: Double?
+    
+    var thumbImageURL: String? {
+        guard let path = posterPath else {return nil}
+        return "https://image.tmdb.org/t/p/w185/" + path
+    }
+    
+    var fullImageURL: String? {
+        guard let path = posterPath else {return nil}
+        return "https://image.tmdb.org/t/p/w500/" + path
+    }
     
     enum CodingKeys: String, CodingKey {
         case id

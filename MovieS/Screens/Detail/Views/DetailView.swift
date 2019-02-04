@@ -9,13 +9,13 @@
 import UIKit
 import Cartography
 import Kingfisher
-import FaceAware
 
 final class DetailView: UIView {
     
     //MARK: - Properties
     private(set) lazy var poster: UIImageView = {
         let poster = UIImageView()
+        poster.contentMode = .scaleAspectFit
         return poster
     }()
     
@@ -45,13 +45,14 @@ final class DetailView: UIView {
     private(set) lazy var overviewLabel: UILabel = {
         let overviewLabel = UILabel()
         overviewLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        overviewLabel.numberOfLines = 0
         return overviewLabel
     }()
     
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView.init(arrangedSubviews: [titleLabel,rateLabel,overviewLabel])
         stackView.axis = .vertical
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.spacing = 10
         return stackView
@@ -77,7 +78,7 @@ final class DetailView: UIView {
             stackView.trailing == stackView.superview!.trailing - 25
             poster.leading == poster.superview!.leading + 25
             poster.trailing == poster.superview!.trailing - 25
-            poster.top == poster.superview!.top + 100
+            poster.top == poster.superview!.top + 150
             poster.height == 300
         }
     }
@@ -88,12 +89,9 @@ final class DetailView: UIView {
         //genreLabel.text = movie.genreIDs as? String
         guard let rate = movie.voteAverage else {return}
         rateLabel.text = String(rate)
-        guard let x = movie.posterPath else {return}
-        if let url = URL(string: x){
-            poster.kf.setImage(with: url, placeholder: UIImage(), options: nil, progressBlock: nil) { (image, error, cacheType, url) in
-                self.poster.clipsToBounds = true
-                //self.poster.focusOnFaces = true
-            }
+        guard let urlString = movie.fullImageURL, let url = URL(string: urlString) else {return}
+        poster.kf.setImage(with: url, placeholder: UIImage(), options: nil, progressBlock: nil) { (image, error, cacheType, url) in
+            self.poster.clipsToBounds = true
         }
     }
 }

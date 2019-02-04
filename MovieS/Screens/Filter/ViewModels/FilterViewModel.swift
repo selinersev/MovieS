@@ -21,7 +21,7 @@ final class FilterViewModel {
     private var genreListData: GenreList?
     private var selectedIndex = 0
     
-    func getSelectedSortingType() -> SortingType{
+    var selectedSortingType: SortingType{
         return sortings[selectedIndex]
     }
     
@@ -72,12 +72,7 @@ enum SectionType {
     case sortingSection, filterSection
     
     var sectionHeaderHeight: CGFloat {
-        switch self {
-        case .sortingSection:
-            return 30.0
-        case .filterSection:
-            return 30.0
-        }
+        return 30.0
     }
     
     var title: String {
@@ -109,3 +104,17 @@ enum SortingType{
         }
     }
 }
+
+
+
+/*
+ filter datayı delegate ile paslama
+ network router yapma
+ search controller
+ -----------------
+ detay ekranında movie nin tüm detayı cekıp uı a basma
+ locazation
+ türlerden filmlere ulaşma (collectıonview)
+ ---------
+ fıltre ekranı gelıstırelecek yıla gore sıtedekı gıbı
+ */

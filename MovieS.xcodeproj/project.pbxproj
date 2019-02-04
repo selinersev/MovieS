@@ -100,7 +100,6 @@
 			isa = PBXGroup;
 			children = (
 				1BB5F6BA21FF2C430075D567 /* Extensions */,
-				1BA3589C21F1D748003E501B /* Networking */,
 				1BA3589B21F1D734003E501B /* Screens */,
 				1BA3589421EE2116003E501B /* Supporting Files */,
 				1BA3588B21EE1E59003E501B /* Info.plist */,
@@ -128,13 +127,6 @@
 			path = Screens;
 			sourceTree = "<group>";
 		};
-		1BA3589C21F1D748003E501B /* Networking */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Networking;
-			sourceTree = "<group>";
-		};
 		1BA3589D21F1D755003E501B /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,7 +145,6 @@
 				1BA358AF21F2102F003E501B /* ViewModels */,
 				1BA358AE21F21020003E501B /* ViewControllers */,
 				1BA358AC21F21013003E501B /* Views */,
-				1BA358AD21F2101A003E501B /* Models */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -208,13 +199,6 @@
 				1BA358B021F21072003E501B /* DetailView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		1BA358AD21F2101A003E501B /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		1BA358AE21F21020003E501B /* ViewControllers */ = {
