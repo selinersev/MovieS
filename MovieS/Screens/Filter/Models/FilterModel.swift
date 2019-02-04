@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct genreList: Codable {
+struct GenreList: Codable {
     let genres: [MovieGenre]
 }
 

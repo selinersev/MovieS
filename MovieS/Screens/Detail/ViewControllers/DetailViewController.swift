@@ -20,7 +20,7 @@ final class DetailViewController: UIViewController {
     
     private(set) var viewModel: DetailViewModel
     
-    var movie = Movie(id: 0, title: "", overview: "", posterPath: "", releaseDate: Date(), voteAverage: 0.0, popularity: 0.0)
+    var movie: Movie?
     
     //MARK: - Life Cycle
     override func loadView() {
@@ -30,13 +30,12 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.337254902, green: 0.337254902, blue: 0.337254902, alpha: 1)
-        viewSource.overviewLabel.text = viewModel.overview
-        viewSource.populateUI(movie: movie)
+        viewSource.populateUI(movie: movie!)
     }
 
     // MARK: - Initialization
     init() {
-        viewModel = DetailViewModel(movie: movie)
+        viewModel = DetailViewModel()
         super.init(nibName: nil, bundle: nil)
     }
     

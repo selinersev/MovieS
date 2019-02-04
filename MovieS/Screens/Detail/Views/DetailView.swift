@@ -11,10 +11,6 @@ import Cartography
 import Kingfisher
 import FaceAware
 
-//protocol MovieDetailDelegate: class {
-//    func sendData(movie: Movie)
-//}
-
 final class DetailView: UIView {
     
     //MARK: - Properties
@@ -31,12 +27,12 @@ final class DetailView: UIView {
         return titleLabel
     }()
     
-//    private(set) lazy var genreLabel: UILabel = {
-//        let genreLabel = UILabel()
-//        let font: UIFont = .boldSystemFont(ofSize: 17.0)
-//        genreLabel.font = font
-//        return genreLabel
-//    }()
+    private(set) lazy var genreLabel: UILabel = {
+        let genreLabel = UILabel()
+        let font: UIFont = .boldSystemFont(ofSize: 17.0)
+        genreLabel.font = font
+        return genreLabel
+    }()
     
     private(set) lazy var rateLabel: UILabel = {
         let rateLabel = UILabel()
@@ -79,7 +75,6 @@ final class DetailView: UIView {
             stackView.leading == stackView.superview!.leading + 25
             stackView.top == poster.bottom + 40
             stackView.trailing == stackView.superview!.trailing - 25
-            //stackView.bottom == stackView.superview!.bottom + 50
             poster.leading == poster.superview!.leading + 25
             poster.trailing == poster.superview!.trailing - 25
             poster.top == poster.superview!.top + 100

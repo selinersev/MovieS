@@ -18,7 +18,6 @@ final class HomeView: UIView {
         tableView.backgroundColor = #colorLiteral(red: 0.337254902, green: 0.337254902, blue: 0.337254902, alpha: 1)
         tableView.separatorInset = UIEdgeInsets.init(top: tableView.rowHeight, left: 10.0, bottom: 0, right: 10.0)
         tableView.showsVerticalScrollIndicator = false
-        //tableView.separatorStyle = .none
         tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "MovieCell")
         return tableView
     }()

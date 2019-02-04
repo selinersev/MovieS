@@ -21,9 +21,17 @@ final class FilterView: UIView {
         tableView.separatorInset = UIEdgeInsets.init(top: tableView.rowHeight, left: 0.0, bottom: 0, right: 0.0)
         tableView.register(FilterSwitchTableViewCell.self, forCellReuseIdentifier: "FilterSwitchCell")
         tableView.register(SortingOptionsTableViewCell.self, forCellReuseIdentifier: "SortingCell")
+        tableView.tableFooterView = footerView
+        tableView.layoutTableFooterView()
         return tableView
     }()
-
+    
+    private lazy var footerTopSpaceView: UIView = {
+        let view = UIView()
+        constrain(view, block: { $0.height == 35.0 })
+        return view
+    }()
+    
     private(set) lazy var filterButton: UIButton = {
         let font: UIFont = .boldSystemFont(ofSize: 17.0)
         let button = UIButton()
@@ -31,23 +39,16 @@ final class FilterView: UIView {
         button.titleLabel?.text = "Filter"
         button.setTitleColor( #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), for: .normal)
         button.titleLabel?.font = font
-        //constrain(button, block: { $0.height == 65.0 })
+        constrain(button, block: { $0.height == 55.0 })
         return button
     }()
     
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView.init(arrangedSubviews: [tableView,filterButton])
-        stackView.axis = .vertical
-        stackView.distribution = .fill
-        stackView.alignment = .fill
-        stackView.spacing = 10
-        return stackView
-    }()
+    private lazy var footerView: UIStackView = .create(arrangedSubViews: [footerTopSpaceView, filterButton])
     
     // MARK: - Initialization
     init() {
         super.init(frame: .zero)
-        
+
         addSubview(tableView)
         constrain(tableView, block: { $0.edges == $0.superview!.edges })
         

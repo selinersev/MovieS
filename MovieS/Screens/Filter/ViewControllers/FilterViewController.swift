@@ -84,6 +84,8 @@ extension FilterViewController: UITableViewDelegate{
         return viewModel.sections[section].sectionHeaderHeight
     }
     
+    
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.reloadData()
         guard let sectionType = viewModel.getSectionType(at: indexPath.section) else {return}

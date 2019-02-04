@@ -10,27 +10,33 @@ import Foundation
 
 final class HomeViewModel {
     
-    private var id: Int
-    private var overview: String
-    private var posterPath: String
-    private var releaseDate: Date
-    private var voteAverage: Double
-    private var popularity: Double
+    private let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=fc918650eaa758b58bf5cfbfe3178e44"
+    private var movieListData: MovieList?
     
-    init(id: Int,
-         title: String,
-         overview: String,
-         posterPath: String,
-         releaseDate: Date,
-         voteAverage: Double,
-         popularity: Double ) {
-        
-        self.id = id
-        self.overview = overview
-        self.posterPath = posterPath
-        self.releaseDate = releaseDate
-        self.voteAverage = voteAverage
-        self.popularity = popularity
-        
+    func getRowCount(for section: Int) ->Int{
+        guard let moviesCount = movieListData?.movies.count else {return 0}
+        return moviesCount
+    }
+    
+    func getMovie(for indexPath: IndexPath) -> Movie? {
+        guard let moviesCount = movieListData?.movies.count else {return nil}
+        guard moviesCount > indexPath.row else {return nil}
+        return movieListData?.movies[indexPath.row]
+    }
+    
+    func fetchGenres( dataFetched: @escaping ([Movie]?) -> () ) {
+        guard let url = URL(string: urlString) else {return}
+        URLSession.shared.dataTask(with: url){(data,response,err) in
+            guard let data = data else { return }
+            print(String(data: data, encoding: String.Encoding.utf8))
+            do {
+                self.movieListData = try JSONDecoder().decode(MovieList.self, from: data)
+                dataFetched(self.movieListData?.movies)
+                
+            }catch let jsonErr {
+                print("Error serializing json:",jsonErr)
+            }
+            
+            }.resume()
     }
 }

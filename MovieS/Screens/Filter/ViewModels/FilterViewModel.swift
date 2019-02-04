@@ -18,7 +18,7 @@ final class FilterViewModel {
 
     private var sortings:[SortingType] = [.byRate,.byReleaseDate,.byPopularity]
     private let urlString = "https://api.themoviedb.org/3/genre/list?api_key=fc918650eaa758b58bf5cfbfe3178e44"
-    private var genreListData: genreList?
+    private var genreListData: GenreList?
     private var selectedIndex = 0
     
     func getSelectedSortingType() -> SortingType{
@@ -56,7 +56,7 @@ final class FilterViewModel {
             guard let data = data else { return }
             print(String(data: data, encoding: String.Encoding.utf8))
             do {
-                self.genreListData = try JSONDecoder().decode(genreList.self, from: data)
+                self.genreListData = try JSONDecoder().decode(GenreList.self, from: data)
                 dataFetched(self.genreListData?.genres)
 
             }catch let jsonErr {
