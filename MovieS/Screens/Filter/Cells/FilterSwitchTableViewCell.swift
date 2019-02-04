@@ -20,7 +20,11 @@ final class FilterSwitchTableViewCell: UITableViewCell {
         return filterSwitch
     }()
     
-    private lazy var genreLabel = UILabel()
+    private lazy var genreLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        return label
+    }()
     
     private lazy var stackView = UIStackView.create(arrangedSubViews: [genreLabel, filterSwitch],
                                                     axis: .horizontal,

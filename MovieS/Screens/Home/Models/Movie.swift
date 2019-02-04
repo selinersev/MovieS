@@ -19,15 +19,15 @@ struct Movie: Codable {
     var voteAverage: Double?
     var popularity: Double?
     
-//    init(id: Int, title: String, overview: String? = nil, posterPath: String? = nil, releaseDate: Date? = nil, voteAverage: Double, popularity: Double?) {
-//        self.id = id
-//        self.title = title
-//        self.overview = overview
-//        self.posterPath = posterPath
-//        self.releaseDate = releaseDate
-//        self.voteAverage = voteAverage
-//        self.popularity = popularity
-//    }
+    init(id: Int, title: String, overview: String? = nil, posterPath: String? = nil, releaseDate: Date? = nil, voteAverage: Double, popularity: Double?) {
+        self.id = id
+        self.title = title
+        self.overview = overview
+        self.posterPath = posterPath
+        self.releaseDate = releaseDate
+        self.voteAverage = voteAverage
+        self.popularity = popularity
+    }
     
     enum CodingKeys: String, CodingKey {
         case id, title, overview, popularity

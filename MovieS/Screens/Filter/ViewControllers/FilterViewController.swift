@@ -39,8 +39,14 @@ final class FilterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.fetchGenres()
-    }    
+        viewModel.fetchGenres { [weak self] data in
+            guard self == self else {return}
+            DispatchQueue.main.async {
+                self?.viewSource.tableView.reloadData()
+            }
+            
+        }
+    }
 
 }
 
@@ -79,9 +85,17 @@ extension FilterViewController: UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.changeSortingField()
-        //delegate?.sendData(soringType: viewModel.getSelectedSortingType())
         tableView.reloadData()
+        guard let sectionType = viewModel.getSectionType(at: indexPath.section) else {return}
+        switch sectionType {
+        case .sortingSection:
+            viewModel.changeSortingField()
+            //delegate?.sendData(soringType: viewModel.getSelectedSortingType())
+           
+        case .filterSection:
+            delegate?.sendData(soringType: viewModel.getSelectedSortingType())
+        }
+
     }
 }
 

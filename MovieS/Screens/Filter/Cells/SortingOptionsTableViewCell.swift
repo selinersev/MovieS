@@ -27,6 +27,7 @@ final class SortingOptionsTableViewCell: UITableViewCell {
         let font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.medium)
         label.font = font
         label.textAlignment = .left
+        label.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         return label
     }()
     

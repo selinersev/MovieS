@@ -24,6 +24,26 @@ final class FilterView: UIView {
         return tableView
     }()
 
+    private(set) lazy var filterButton: UIButton = {
+        let font: UIFont = .boldSystemFont(ofSize: 17.0)
+        let button = UIButton()
+        button.backgroundColor = #colorLiteral(red: 0.2745098039, green: 0.7882352941, blue: 0.7019607843, alpha: 1)
+        button.titleLabel?.text = "Filter"
+        button.setTitleColor( #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), for: .normal)
+        button.titleLabel?.font = font
+        //constrain(button, block: { $0.height == 65.0 })
+        return button
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView.init(arrangedSubviews: [tableView,filterButton])
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.spacing = 10
+        return stackView
+    }()
+    
     // MARK: - Initialization
     init() {
         super.init(frame: .zero)

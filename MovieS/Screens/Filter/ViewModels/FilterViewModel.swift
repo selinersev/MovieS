@@ -50,16 +50,15 @@ final class FilterViewModel {
         }
     }
     
-    func fetchGenres() {
+    func fetchGenres( dataFetched: @escaping ([MovieGenre]?) -> () ) {
         guard let url = URL(string: urlString) else {return}
         URLSession.shared.dataTask(with: url){(data,response,err) in
             guard let data = data else { return }
             print(String(data: data, encoding: String.Encoding.utf8))
             do {
                 self.genreListData = try JSONDecoder().decode(genreList.self, from: data)
-                DispatchQueue.main.async { [weak self] in
-                    //tableView.reloadData()
-                }
+                dataFetched(self.genreListData?.genres)
+
             }catch let jsonErr {
                 print("Error serializing json:",jsonErr)
             }
@@ -75,9 +74,9 @@ enum SectionType {
     var sectionHeaderHeight: CGFloat {
         switch self {
         case .sortingSection:
-            return 20.0
+            return 30.0
         case .filterSection:
-            return 20.0
+            return 30.0
         }
     }
     
