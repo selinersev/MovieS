@@ -9,6 +9,10 @@
 import Cartography
 
 final class HomeViewController: UIViewController, FilterViewControllerDelegate {
+    func sendSelectedGenre(genre: MovieGenre) {
+        
+    }
+    
 
     //MARK: - Properties
     private lazy var viewSource: HomeView = {
@@ -43,7 +47,8 @@ final class HomeViewController: UIViewController, FilterViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        viewSource.searchController.hidesNavigationBarDuringPresentation = true
+        self.definesPresentationContext = true
         setUpNavBar()
         viewModel.fetchMovies { [weak self] data in
             guard self == self else {return}

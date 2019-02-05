@@ -69,7 +69,10 @@ extension FilterViewController: UITableViewDataSource{
         case .filterSection:
             let cell: FilterSwitchTableViewCell = tableView.dequeueReusableCell(withIdentifier: "FilterSwitchCell", for: indexPath) as! FilterSwitchTableViewCell
             guard let genre = viewModel.getGenre(for: indexPath) else {return UITableViewCell()}
-            cell.populate(with: genre)
+            if cell.filterSwitch.isOn{
+                delegate?.sendSelectedGenre(genre: genre)
+            }
+            cell.populate(with: genre, isSelected: true)
             return cell
         }
 
@@ -105,4 +108,5 @@ extension FilterViewController: UITableViewDelegate{
 
 protocol FilterViewControllerDelegate: class{
     func sendData(soringType: SortingType)
+    func sendSelectedGenre(genre: MovieGenre)
 }

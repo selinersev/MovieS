@@ -42,7 +42,7 @@ final class FilterView: UIView {
         button.titleLabel?.font = font
         button.layer.borderWidth = 3.0
         button.layer.cornerRadius = 25.0
-        button.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        button.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         constrain(button){ button in
             button.height == 60
             button.width == 60

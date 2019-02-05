@@ -8,11 +8,12 @@
 
 import Cartography
 
-final class FilterSwitchTableViewCell: UITableViewCell {
+final class FilterSwitchTableViewCell: UITableViewCell{
     
     //MARK - Properties
-    private lazy var filterSwitch: UISwitch = {
+    lazy var filterSwitch: UISwitch = {
         let filterSwitch = UISwitch()
+        filterSwitch.onTintColor = #colorLiteral(red: 0.2745098039, green: 0.7882352941, blue: 0.7019607843, alpha: 1)
         constrain(filterSwitch, block: {
             $0.width == 50
             $0.height == 30
@@ -29,10 +30,13 @@ final class FilterSwitchTableViewCell: UITableViewCell {
     private lazy var stackView = UIStackView.create(arrangedSubViews: [genreLabel, filterSwitch],
                                                     axis: .horizontal,
                                                     spacing: 10.0)
+    var selectedGenres = [MovieGenre]()
+    let controller = FilterViewController()
+    
     // MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+        controller.delegate = self
         selectionStyle = .none
         backgroundColor = #colorLiteral(red: 0.337254902, green: 0.337254902, blue: 0.337254902, alpha: 1)
         
@@ -56,9 +60,20 @@ final class FilterSwitchTableViewCell: UITableViewCell {
     }
     
     //MARK: - PopulateUI
-    func populate(with type: MovieGenre) {
+    func populate(with type: MovieGenre, isSelected: Bool) {
         genreLabel.text = type.name
     }
     
 }
 
+extension FilterSwitchTableViewCell: FilterViewControllerDelegate{
+    func sendData(soringType: SortingType) {
+        
+    }
+    
+    func sendSelectedGenre(genre: MovieGenre) {
+        selectedGenres.append(genre)
+    }
+    
+    
+}

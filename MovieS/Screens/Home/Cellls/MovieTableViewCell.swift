@@ -26,6 +26,7 @@ final class MovieTableViewCell: UITableViewCell {
         let movieLabel = UILabel()
         movieLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         movieLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.bold)
+        movieLabel.numberOfLines = 0
         return movieLabel
     }()
     
