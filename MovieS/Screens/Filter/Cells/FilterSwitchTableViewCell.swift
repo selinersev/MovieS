@@ -8,6 +8,10 @@
 
 import Cartography
 
+protocol FilterSwitchTableViewCellDelegate: class {
+    func didSelect(genre:MovieGenre)
+}
+
 final class FilterSwitchTableViewCell: UITableViewCell{
     
     //MARK - Properties
@@ -18,6 +22,7 @@ final class FilterSwitchTableViewCell: UITableViewCell{
             $0.width == 50
             $0.height == 30
         })
+        filterSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
         return filterSwitch
     }()
     
@@ -30,13 +35,13 @@ final class FilterSwitchTableViewCell: UITableViewCell{
     private lazy var stackView = UIStackView.create(arrangedSubViews: [genreLabel, filterSwitch],
                                                     axis: .horizontal,
                                                     spacing: 10.0)
-    var selectedGenres = [MovieGenre]()
-    let controller = FilterViewController()
+    var genre: MovieGenre?
+
+    weak var delegate: FilterSwitchTableViewCellDelegate?
     
     // MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        controller.delegate = self
         selectionStyle = .none
         backgroundColor = #colorLiteral(red: 0.337254902, green: 0.337254902, blue: 0.337254902, alpha: 1)
         
@@ -60,20 +65,18 @@ final class FilterSwitchTableViewCell: UITableViewCell{
     }
     
     //MARK: - PopulateUI
-    func populate(with type: MovieGenre, isSelected: Bool) {
+    func populate(with type: MovieGenre, genreList: [MovieGenre]) {
         genreLabel.text = type.name
+        genre = type
+        if genreList.contains(type){
+            filterSwitch.isOn = true
+        }
     }
     
+    @objc func switchValueChanged(){
+        guard let selectedGenre = genre else { return }
+        delegate?.didSelect(genre: selectedGenre)
+    }
 }
 
-extension FilterSwitchTableViewCell: FilterViewControllerDelegate{
-    func sendData(soringType: SortingType) {
-        
-    }
-    
-    func sendSelectedGenre(genre: MovieGenre) {
-        selectedGenres.append(genre)
-    }
-    
-    
-}
+

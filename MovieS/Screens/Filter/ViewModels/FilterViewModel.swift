@@ -12,6 +12,7 @@ import UIKit
 final class FilterViewModel {
     
     //MARK: - Properties
+    var selectedGenres = [MovieGenre]()
     var sections: [SectionType] {
         return [.sortingSection, .filterSection]
     }

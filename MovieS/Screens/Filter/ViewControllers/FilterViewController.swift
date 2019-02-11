@@ -20,8 +20,6 @@ final class FilterViewController: UIViewController {
     
     private var viewModel: FilterViewModel
     
-    weak var delegate: FilterViewControllerDelegate?
-    
     // MARK: - Initialization
     init() {
         viewModel = FilterViewModel()
@@ -69,10 +67,8 @@ extension FilterViewController: UITableViewDataSource{
         case .filterSection:
             let cell: FilterSwitchTableViewCell = tableView.dequeueReusableCell(withIdentifier: "FilterSwitchCell", for: indexPath) as! FilterSwitchTableViewCell
             guard let genre = viewModel.getGenre(for: indexPath) else {return UITableViewCell()}
-            if cell.filterSwitch.isOn{
-                delegate?.sendSelectedGenre(genre: genre)
-            }
-            cell.populate(with: genre, isSelected: true)
+            cell.delegate = self
+            cell.populate(with: genre, genreList: viewModel.selectedGenres)
             return cell
         }
 
@@ -97,8 +93,6 @@ extension FilterViewController: UITableViewDelegate{
         switch sectionType {
         case .sortingSection:
             viewModel.changeSortingField()
-            //delegate?.sendData(soringType: viewModel.getSelectedSortingType())
-           
         case .filterSection:
             return
         }
@@ -106,7 +100,15 @@ extension FilterViewController: UITableViewDelegate{
     }
 }
 
-protocol FilterViewControllerDelegate: class{
-    func sendData(soringType: SortingType)
-    func sendSelectedGenre(genre: MovieGenre)
+extension FilterViewController: FilterSwitchTableViewCellDelegate {
+    func didSelect(genre: MovieGenre) {
+        if viewModel.selectedGenres.contains(genre) {
+            guard let index = viewModel.selectedGenres.index(of: genre) else {return}
+            viewModel.selectedGenres.remove(at: index)
+        }else {
+            viewModel.selectedGenres.append(genre)
+        }
+
+    }
 }
+

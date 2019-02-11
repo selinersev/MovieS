@@ -21,3 +21,9 @@ struct MovieGenre: Codable {
         case name = "name"
     }
 }
+
+extension MovieGenre:Equatable{
+    static func == (lhs: MovieGenre, rhs: MovieGenre) -> Bool {
+        return lhs.id == rhs.id
+    }
+}

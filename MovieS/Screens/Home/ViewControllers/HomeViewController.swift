@@ -8,11 +8,7 @@
 
 import Cartography
 
-final class HomeViewController: UIViewController, FilterViewControllerDelegate {
-    func sendSelectedGenre(genre: MovieGenre) {
-        
-    }
-    
+final class HomeViewController: UIViewController{
 
     //MARK: - Properties
     private lazy var viewSource: HomeView = {
@@ -78,7 +74,6 @@ final class HomeViewController: UIViewController, FilterViewControllerDelegate {
     @objc func filter() {
         let filterViewController = FilterViewController()
         navigationController?.pushViewController(filterViewController, animated: true)
-        filterViewController.delegate = self
     }
 }
 
