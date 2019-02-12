@@ -78,5 +78,3 @@ final class FilterSwitchTableViewCell: UITableViewCell{
         delegate?.didSelect(genre: selectedGenre)
     }
 }
-
-

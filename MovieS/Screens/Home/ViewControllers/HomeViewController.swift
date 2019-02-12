@@ -25,7 +25,6 @@ final class HomeViewController: UIViewController{
     
     private(set) var viewModel: HomeViewModel
     
-    
     // MARK: - Initialization
     init() {
         viewModel = HomeViewModel()
@@ -53,15 +52,11 @@ final class HomeViewController: UIViewController{
             }
         }
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         viewSource.tableView.reloadData()
     }
-    
-    func sendData(soringType: SortingType) {
-        //.............
-    }
-    
+
     func setUpNavBar(){
         navigationItem.rightBarButtonItem = filterButton
         navigationItem.searchController = viewSource.searchController
@@ -72,8 +67,9 @@ final class HomeViewController: UIViewController{
     }
 
     @objc func filter() {
-        let filterViewController = FilterViewController()
-        navigationController?.pushViewController(filterViewController, animated: true)
+        let controller = FilterViewController(with: viewModel.genres, sortingType: viewModel.sortingType)
+        controller.delegate = self
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
 
@@ -98,4 +94,12 @@ extension HomeViewController: UITableViewDelegate{
          let controller = DetailViewController(with: movie)
         navigationController?.pushViewController(controller, animated: true)
     }
+}
+
+extension HomeViewController: FilterViewControllerDelegate{
+    func sendFilterOptions(sortingType: SortingType, genres: [MovieGenre]) {
+        viewModel.sortingType = sortingType
+        viewModel.genres = genres
+    }
+    
 }

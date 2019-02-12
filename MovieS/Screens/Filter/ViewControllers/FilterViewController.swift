@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol FilterViewControllerDelegate: class {
+    func sendFilterOptions(sortingType: SortingType, genres: [MovieGenre])
+}
+
 final class FilterViewController: UIViewController {
 
     //MARK: - Properties
@@ -15,14 +19,17 @@ final class FilterViewController: UIViewController {
         let viewSource = FilterView()
         viewSource.tableView.dataSource = self
         viewSource.tableView.delegate = self
+        viewSource.filterButton.addTarget(self, action: #selector(filterButtonAction), for: .touchUpInside)
         return viewSource
     }()
     
     private var viewModel: FilterViewModel
     
+    weak var delegate: FilterViewControllerDelegate?
+    
     // MARK: - Initialization
-    init() {
-        viewModel = FilterViewModel()
+    init(with genres: [MovieGenre], sortingType: SortingType) {
+        viewModel = FilterViewModel(with: genres, sortingType: sortingType)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -44,7 +51,12 @@ final class FilterViewController: UIViewController {
             }
         }
     }
-
+    
+    @objc func filterButtonAction(){
+        delegate?.sendFilterOptions(sortingType: viewModel.selectedSortingType , genres: viewModel.selectedGenres)
+        navigationController?.popViewController(animated: true)
+    }
+    
 }
 
 extension FilterViewController: UITableViewDataSource{

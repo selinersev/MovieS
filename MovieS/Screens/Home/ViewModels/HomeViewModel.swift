@@ -13,6 +13,9 @@ final class HomeViewModel {
     private let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=fc918650eaa758b58bf5cfbfe3178e44"
     private var movieListData: MovieList?
     
+    var sortingType: SortingType = .byPopularity
+    var genres = [MovieGenre]()
+    
     func getRowCount(for section: Int) ->Int{
         guard let moviesCount = movieListData?.movies.count else {return 0}
         return moviesCount
