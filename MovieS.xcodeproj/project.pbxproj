@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10A90DF822240AE90018CCF7 /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A90DF722240AE90018CCF7 /* EndPointType.swift */; };
+		10A90DFA22240C520018CCF7 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A90DF922240C520018CCF7 /* HTTPMethod.swift */; };
+		10A90DFC22240DBD0018CCF7 /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A90DFB22240DBD0018CCF7 /* HTTPTask.swift */; };
+		10A90DFE222410790018CCF7 /* URLParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A90DFD222410790018CCF7 /* URLParameterEncoder.swift */; };
+		10A90E002224121A0018CCF7 /* JSONParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A90DFF2224121A0018CCF7 /* JSONParameterEncoder.swift */; };
+		10A90E02222412E20018CCF7 /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A90E01222412E20018CCF7 /* NetworkRouter.swift */; };
+		10A90E042224136C0018CCF7 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A90E032224136C0018CCF7 /* Router.swift */; };
 		1B6291162201DAF900BEA104 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6291152201DAF900BEA104 /* FilterModel.swift */; };
 		1B62911B22082E7400BEA104 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B62911A22082E7400BEA104 /* UITableView.swift */; };
 		1BA3588021EE1E57003E501B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA3587F21EE1E57003E501B /* AppDelegate.swift */; };
@@ -31,6 +38,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		10A90DF722240AE90018CCF7 /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
+		10A90DF922240C520018CCF7 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		10A90DFB22240DBD0018CCF7 /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
+		10A90DFD222410790018CCF7 /* URLParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLParameterEncoder.swift; sourceTree = "<group>"; };
+		10A90DFF2224121A0018CCF7 /* JSONParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParameterEncoder.swift; sourceTree = "<group>"; };
+		10A90E01222412E20018CCF7 /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
+		10A90E032224136C0018CCF7 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		1B6291152201DAF900BEA104 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
 		1B62911A22082E7400BEA104 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		1BA3587C21EE1E57003E501B /* MovieS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +84,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10A90DF222240A810018CCF7 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				10A90DF622240ABD0018CCF7 /* Encoding */,
+				10A90DF322240A950018CCF7 /* EndPoint */,
+				10A90DF422240AA10018CCF7 /* Manager */,
+				10A90DF522240AB30018CCF7 /* Service */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		10A90DF322240A950018CCF7 /* EndPoint */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = EndPoint;
+			sourceTree = "<group>";
+		};
+		10A90DF422240AA10018CCF7 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		10A90DF522240AB30018CCF7 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				10A90DF722240AE90018CCF7 /* EndPointType.swift */,
+				10A90DF922240C520018CCF7 /* HTTPMethod.swift */,
+				10A90DFB22240DBD0018CCF7 /* HTTPTask.swift */,
+				10A90E01222412E20018CCF7 /* NetworkRouter.swift */,
+				10A90E032224136C0018CCF7 /* Router.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		10A90DF622240ABD0018CCF7 /* Encoding */ = {
+			isa = PBXGroup;
+			children = (
+				10A90DFD222410790018CCF7 /* URLParameterEncoder.swift */,
+				10A90DFF2224121A0018CCF7 /* JSONParameterEncoder.swift */,
+			);
+			path = Encoding;
+			sourceTree = "<group>";
+		};
 		1B62911922082E1600BEA104 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +159,7 @@
 		1BA3587E21EE1E57003E501B /* MovieS */ = {
 			isa = PBXGroup;
 			children = (
+				10A90DF222240A810018CCF7 /* Networking */,
 				1BB5F6BA21FF2C430075D567 /* Extensions */,
 				1BA3589B21F1D734003E501B /* Screens */,
 				1BA3589421EE2116003E501B /* Supporting Files */,
@@ -434,21 +495,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10A90DFC22240DBD0018CCF7 /* HTTPTask.swift in Sources */,
 				1BA358A421F1D7C0003E501B /* HomeViewController.swift in Sources */,
+				10A90E042224136C0018CCF7 /* Router.swift in Sources */,
 				1BB5F6BD21FF2C660075D567 /* UIStackViewExtension.swift in Sources */,
 				1BA358B121F21072003E501B /* DetailView.swift in Sources */,
+				10A90DF822240AE90018CCF7 /* EndPointType.swift in Sources */,
 				1B6291162201DAF900BEA104 /* FilterModel.swift in Sources */,
 				1BA358A821F1D856003E501B /* HomeView.swift in Sources */,
 				1B62911B22082E7400BEA104 /* UITableView.swift in Sources */,
 				1BB5F6B721FAFE350075D567 /* FilterSwitchTableViewCell.swift in Sources */,
+				10A90DFA22240C520018CCF7 /* HTTPMethod.swift in Sources */,
 				1BA358AA21F1F564003E501B /* MovieTableViewCell.swift in Sources */,
 				1BB5F6C421FF45560075D567 /* UILabelExtension.swift in Sources */,
+				10A90DFE222410790018CCF7 /* URLParameterEncoder.swift in Sources */,
 				1BA358B421F248E6003E501B /* DetailViewModel.swift in Sources */,
 				1BB5F6B221F9FC680075D567 /* FilterViewController.swift in Sources */,
 				1BB5F6B921FAFE4C0075D567 /* SortingOptionsTableViewCell.swift in Sources */,
 				1BA358A621F1D821003E501B /* HomeViewModel.swift in Sources */,
+				10A90E02222412E20018CCF7 /* NetworkRouter.swift in Sources */,
 				1BA358B621F24924003E501B /* DetailViewController.swift in Sources */,
 				1BA3588021EE1E57003E501B /* AppDelegate.swift in Sources */,
+				10A90E002224121A0018CCF7 /* JSONParameterEncoder.swift in Sources */,
 				1BB5F6B021F9FC3A0075D567 /* FilterView.swift in Sources */,
 				1BB5F6B521FAFD020075D567 /* FilterViewModel.swift in Sources */,
 				1BA3589221EE2105003E501B /* MovieModel.swift in Sources */,
