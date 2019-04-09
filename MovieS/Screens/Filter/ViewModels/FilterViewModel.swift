@@ -62,7 +62,7 @@ final class FilterViewModel {
         guard let url = URL(string: urlString) else {return}
         URLSession.shared.dataTask(with: url) {(data, _, _) in
             guard let data = data else { return }
-            print(String(data: data, encoding: String.Encoding.utf8))
+//            print(String(data: data, encoding: String.Encoding.utf8))
             do {
                 self.genreListData = try JSONDecoder().decode(GenreList.self, from: data)
                 dataFetched(self.genreListData?.genres)
@@ -107,6 +107,10 @@ enum SortingType {
         switch self {
         case .byPopularity:
             return "popularity.desc"
+        case .byRate:
+            return "vote_average.desc"
+        case .byReleaseDate:
+            return "release_date.desc"
         default:
             return ""
         }

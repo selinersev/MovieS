@@ -11,10 +11,14 @@ import Cartography
 final class HomeViewController: UIViewController{
 
     //MARK: - Properties
+    var networkManager: NetworkManager = NetworkManager()
+    
     private lazy var viewSource: HomeView = {
         let viewSource = HomeView()
         viewSource.tableView.dataSource = self
         viewSource.tableView.delegate = self
+//        viewSource.searchController.searchResultsUpdater = self
+//        viewSource.searchController.searchBar.delegate = self
         return viewSource
     }()
     
@@ -45,6 +49,14 @@ final class HomeViewController: UIViewController{
         viewSource.searchController.hidesNavigationBarDuringPresentation = true
         self.definesPresentationContext = true
         setUpNavBar()
+//        networkManager.getNewMovies(page: 1) { movies, error in
+//            if let movies = movies {
+//                self.viewModel.movieListData?.movies = movies
+//                DispatchQueue.main.async {
+//                    self.viewSource.tableView.reloadData()
+//                }
+//            }
+//        }
         viewModel.fetchMovies { [weak self] data in
             guard self == self else {return}
             DispatchQueue.main.async {
@@ -54,7 +66,17 @@ final class HomeViewController: UIViewController{
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        viewSource.tableView.reloadData()
+        print(viewModel.isFiltered)
+        if viewModel.isFiltered == true {
+            viewModel.fetchFilteredMovies { [weak self] data in
+                guard self == self else {return}
+                DispatchQueue.main.async {
+                    self?.viewSource.tableView.reloadData()
+                }
+            }
+        }else {
+            viewSource.tableView.reloadData()
+        }
     }
 
     func setUpNavBar(){
@@ -97,9 +119,30 @@ extension HomeViewController: UITableViewDelegate{
 }
 
 extension HomeViewController: FilterViewControllerDelegate{
-    func sendFilterOptions(sortingType: SortingType, genres: [MovieGenre]) {
+    func sendFilterOptions(sortingType: SortingType, genres: [MovieGenre], filtered: Bool) {
         viewModel.sortingType = sortingType
         viewModel.genres = genres
+        viewModel.isFiltered = filtered
     }
-    
 }
+
+//extension HomeViewController: UISearchResultsUpdating {
+//    func updateSearchResults(for searchController: UISearchController) {
+//        guard let movies = viewModel.movieListData?.movies else {return}
+//        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
+//            viewModel.isSearching = true
+//            viewModel.filteredMovieListData?.movies = movies.filter { movie in
+//                return movie.title.lowercased().contains(searchText.lowercased())
+//            }
+//        } else {
+//            viewModel.filteredMovieListData?.movies = movies
+//        }
+//        viewSource.tableView.reloadData()
+//    }
+//}
+//
+//extension HomeViewController: UISearchBarDelegate {
+//    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+//        viewModel.isSearching = false
+//    }
+//}
