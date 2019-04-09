@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FilterViewControllerDelegate: class {
-    func sendFilterOptions(sortingType: SortingType, genres: [MovieGenre])
+    func sendFilterOptions(sortingType: SortingType, genres: [MovieGenre], filtered: Bool)
 }
 
 final class FilterViewController: UIViewController {
@@ -53,7 +53,8 @@ final class FilterViewController: UIViewController {
     }
     
     @objc func filterButtonAction(){
-        delegate?.sendFilterOptions(sortingType: viewModel.selectedSortingType , genres: viewModel.selectedGenres)
+        delegate?.sendFilterOptions(sortingType: viewModel.selectedSortingType , genres: viewModel.selectedGenres, filtered: true)
+        print(viewModel.selectedGenres)
         navigationController?.popViewController(animated: true)
     }
     
@@ -120,7 +121,6 @@ extension FilterViewController: FilterSwitchTableViewCellDelegate {
         }else {
             viewModel.selectedGenres.append(genre)
         }
-
     }
 }
 

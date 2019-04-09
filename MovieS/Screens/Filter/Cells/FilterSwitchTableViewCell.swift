@@ -70,6 +70,8 @@ final class FilterSwitchTableViewCell: UITableViewCell{
         genre = type
         if genreList.contains(type){
             filterSwitch.isOn = true
+        } else {
+            filterSwitch.isOn = false
         }
     }
     
