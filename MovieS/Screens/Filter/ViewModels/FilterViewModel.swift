@@ -16,9 +16,9 @@ final class FilterViewModel {
     var sections: [SectionType] {
         return [.sortingSection, .filterSection]
     }
-
+    
+    private let sessionProvider = URLSessionProvider()
     private var sortings: [SortingType] = [.byRate, .byReleaseDate, .byPopularity]
-    private let urlString = "https://api.themoviedb.org/3/genre/list?api_key=fc918650eaa758b58bf5cfbfe3178e44"
     private var genreListData: GenreList?
     private var selectedIndex = 0
 
@@ -58,20 +58,18 @@ final class FilterViewModel {
         }
     }
 
-    func fetchGenres( dataFetched: @escaping ([MovieGenre]?) -> Void ) {
-        guard let url = URL(string: urlString) else {return}
-        URLSession.shared.dataTask(with: url) {(data, _, _) in
-            guard let data = data else { return }
-//            print(String(data: data, encoding: String.Encoding.utf8))
-            do {
-                self.genreListData = try JSONDecoder().decode(GenreList.self, from: data)
-                dataFetched(self.genreListData?.genres)
-
-            } catch let jsonErr {
-                print("Error serializing json:", jsonErr)
+    
+    
+    func fetchGenres(dataFetched: @escaping ([MovieGenre]?) -> Void ){
+        sessionProvider.request(type: GenreList.self, service: MovieService.getGenres) { response in
+            switch response {
+            case let .success(genres):
+                self.genreListData = genres
+                dataFetched(genres.genres)
+            case let .failure(error):
+                print(error)
             }
-
-            }.resume()
+        }
     }
 }
 
@@ -111,8 +109,6 @@ enum SortingType {
             return "vote_average.desc"
         case .byReleaseDate:
             return "release_date.desc"
-        default:
-            return ""
         }
     }
 }

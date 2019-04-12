@@ -10,29 +10,36 @@ import Foundation
 
 final class HomeViewModel {
     
-    private let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=fc918650eaa758b58bf5cfbfe3178e44"
     var movieListData: MovieList?
     var filteredMovieListData: MovieList?
-    var searchedMovieLisatData: MovieList?
+    var searchedMovieListData: MovieList?
     var isFiltered = false
+    var isSearched = false
     
     var sortingType: SortingType = .byPopularity
     var genres = [MovieGenre]()
-    var filterApi = FilterAPi()
+    private let sessionProvider = URLSessionProvider()
     
     func getRowCount(for section: Int) ->Int{
+        if isSearched == true {
+            guard let moviesCount = searchedMovieListData?.movies.count else {return 0}
+            return moviesCount
+        }
         if isFiltered == true {
             guard let moviesCount = filteredMovieListData?.movies.count else {return 0}
-            print("******\(moviesCount)")
             return moviesCount
         }else {
             guard let moviesCount = movieListData?.movies.count else {return 0}
-            print("-----\(moviesCount)")
             return moviesCount
         }
     }
     
     func getMovie(for indexPath: IndexPath) -> Movie? {
+        if isSearched == true {
+            guard let moviesCount = searchedMovieListData?.movies.count else {return nil}
+            guard moviesCount > indexPath.row else {return nil}
+            return searchedMovieListData?.movies[indexPath.row]
+        }
         if isFiltered == true {
             guard let moviesCount = filteredMovieListData?.movies.count else {return nil}
             guard moviesCount > indexPath.row else {return nil}
@@ -44,54 +51,45 @@ final class HomeViewModel {
         }
     }
     
-    func fetchFilteredMovies( dataFetched: @escaping ([Movie]?) -> () ){
-        let urlFilterString = filterApi.filterMovieList(sortingStyle: sortingType, genreID: genres[0].id)
-        guard let url = URL(string: urlFilterString) else {return}
-        URLSession.shared.dataTask(with: url){(data,response,err) in
-            guard let data = data else { return }
-            print(String(data: data, encoding: String.Encoding.utf8))
-            do {
-                self.filteredMovieListData = try JSONDecoder().decode(MovieList.self, from: data)
-                dataFetched(self.filteredMovieListData?.movies)
-                
-            }catch let jsonErr {
-                print("Error serializing json:",jsonErr)
+    func fetchFilteredMovies(dataFetched: @escaping () -> ()) {
+        let genresParam = genres.map{String($0.id)}.joined(separator: ",")
+        var params = Parameters()
+        if genres.count != 0 {
+           params["with_genres"] = genresParam
+        }
+        params ["sort_by"] = sortingType.serviceParam
+        sessionProvider.request(type: MovieList.self, service: MovieService.filter(params: params)) { response in
+            switch response {
+            case let .success(movies):
+                self.filteredMovieListData = movies
+                dataFetched()
+            case let .failure(error):
+                print(error)
             }
-            
-            }.resume()
+        }
     }
     
-    func fetchMovies( dataFetched: @escaping ([Movie]?) -> () ) {
-        guard let url = URL(string: urlString) else {return}
-        URLSession.shared.dataTask(with: url){(data,response,err) in
-            guard let data = data else { return }
-//            print(String(data: data, encoding: String.Encoding.utf8))
-            do {
-                self.movieListData = try JSONDecoder().decode(MovieList.self, from: data)
-                dataFetched(self.movieListData?.movies)
-
-            }catch let jsonErr {
-                print("Error serializing json:",jsonErr)
+    func fetchMovies(dataFetched: @escaping () -> ()){
+        sessionProvider.request(type: MovieList.self, service: MovieService.getMovies) { response in
+            switch response {
+            case let .success(movies):
+                self.movieListData = movies
+                dataFetched()
+            case let .failure(error):
+                print(error)
             }
-
-            }.resume()
-//        let request = APIRequest(method: .get, path: "discover/movie")
-//        APIClient().perform(request) { (result) in
-//            print(request)
-//            switch result {
-//            case .success(let response):
-//                if let response = try? response.decode(to: MovieList.self) {
-//                    let movieList = response.body
-//                    print("Received posts: \(movieList.movies)")
-//                    self.movieListData = movieList
-//                    dataFetched(self.movieListData?.movies)
-//                } else {
-//                    print("Failed to decode response")
-//                    print(String.init(data: response.body!, encoding: String.Encoding.utf8))
-//                }
-//            case .failure:
-//                print("Error perform network request")
-//            }
-//        }
+        }
+    }
+    
+    func search(searchText: String,dataFetched: @escaping () -> ()) {
+        sessionProvider.request(type: MovieList.self, service: MovieService.search(params: ["query": searchText])) { response in
+            switch response {
+            case let .success(movies):
+                self.searchedMovieListData = movies
+                dataFetched()
+            case let .failure(error):
+                print(error)
+            }
+        }
     }
 }

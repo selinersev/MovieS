@@ -84,14 +84,14 @@ final class DetailView: UIView {
     }
 
     func populateUI(movie: Movie){
-        titleLabel.text = movie.title
-        overviewLabel.text = movie.overview
-        //genreLabel.text = movie.genreIDs as? String
-        guard let rate = movie.voteAverage else {return}
-        rateLabel.text = String(rate)
-        guard let urlString = movie.fullImageURL, let url = URL(string: urlString) else {return}
-        poster.kf.setImage(with: url, placeholder: UIImage(), options: nil, progressBlock: nil) { (image, error, cacheType, url) in
-            self.poster.clipsToBounds = true
-        }
+//        titleLabel.text = movie.title
+//        overviewLabel.text = movie.overview
+//        //genreLabel.text = movie.genreIDs as? String
+//        guard let rate = movie.voteAverage else {return}
+//        rateLabel.text = String(rate)
+//        guard let urlString = movie.fullImageURL, let url = URL(string: urlString) else {return}
+//        poster.kf.setImage(with: url, placeholder: UIImage(), options: nil, progressBlock: nil) { (image, error, cacheType, url) in
+//            self.poster.clipsToBounds = true
+//        }
     }
 }

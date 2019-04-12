@@ -35,7 +35,7 @@ struct Movie: Decodable {
     
     var id: Int
     var title: String
-    private var posterPath: String?
+    var posterPath: String?
     var overview: String?
     var releaseDate: String?
     var genreIDs: [Int]?
@@ -46,12 +46,12 @@ struct Movie: Decodable {
         guard let path = posterPath else {return nil}
         return "https://image.tmdb.org/t/p/w185/" + path
     }
-    
+
     var fullImageURL: String? {
         guard let path = posterPath else {return nil}
         return "https://image.tmdb.org/t/p/w500/" + path
     }
-    
+
     private enum CodingKeys: String, CodingKey {
         case id
         case title
@@ -67,12 +67,12 @@ struct Movie: Decodable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         id = try values.decode(Int.self, forKey: .id)
         title = try values.decode(String.self, forKey: .title)
-        posterPath = try values.decode(String.self, forKey: .posterPath)
-        overview = try values.decode(String.self, forKey: .overview)
-        releaseDate = try values.decode(String.self, forKey: .releaseDate)
-        voteAverage = try values.decode(Double.self, forKey: .voteAverage)
-        popularity = try values.decode(Double.self, forKey: .popularity)
-        genreIDs = try values.decode([Int].self, forKey: .genreIDs)
+        posterPath = try? values.decode(String.self, forKey: .posterPath)
+        overview = try? values.decode(String.self, forKey: .overview)
+        releaseDate = try? values.decode(String.self, forKey: .releaseDate)
+        voteAverage = try? values.decode(Double.self, forKey: .voteAverage)
+        popularity = try? values.decode(Double.self, forKey: .popularity)
+        genreIDs = try? values.decode([Int].self, forKey: .genreIDs)
     }
 }
 

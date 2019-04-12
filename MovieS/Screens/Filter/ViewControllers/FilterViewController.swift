@@ -54,6 +54,7 @@ final class FilterViewController: UIViewController {
     
     @objc func filterButtonAction(){
         delegate?.sendFilterOptions(sortingType: viewModel.selectedSortingType , genres: viewModel.selectedGenres, filtered: true)
+        print(viewModel.selectedSortingType.serviceParam)
         print(viewModel.selectedGenres)
         navigationController?.popViewController(animated: true)
     }
