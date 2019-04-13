@@ -34,6 +34,38 @@ final class HomeView: UIView {
         return searchController
     }()
     
+    private(set) lazy var filterButton: UIButton = {
+        let view = UIButton()
+        view.setImage(#imageLiteral(resourceName: "filterApllied"), for: .normal)
+        view.frame = CGRect(x: 0, y: 0, width: 27, height: 27)
+        constrain(view) { x in
+            x.height == 27.0
+            x.width == 27.0
+        }
+        return view
+    }()
+    
+    private(set) lazy var trashButton: UIButton = {
+        let view = UIButton()
+        view.setImage(#imageLiteral(resourceName: "trash"), for: .normal)
+        view.frame = CGRect(x: 0, y: 0, width: 27, height: 27)
+        constrain(view) { x in
+            x.height == 27.0
+            x.width == 27.0
+        }
+        return view
+    }()
+    
+    
+    private(set) lazy var filterBarButton: UIBarButtonItem = {
+        let barButton = UIBarButtonItem.init(customView: filterButton)
+        return barButton
+    }()
+    
+    private(set) lazy var trashBarButton: UIBarButtonItem = {
+        let barButton = UIBarButtonItem.init(customView: trashButton)
+        return barButton
+    }()
     
     // MARK: - Initialization
     init() {

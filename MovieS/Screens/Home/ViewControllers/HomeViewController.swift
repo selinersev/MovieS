@@ -16,13 +16,9 @@ final class HomeViewController: UIViewController{
         viewSource.tableView.dataSource = self
         viewSource.tableView.delegate = self
         viewSource.searchController.searchBar.delegate = self
+//        viewSource.searchController.searchResultsUpdater = self
         return viewSource
     }()
-    
-    private lazy var filterButton = UIBarButtonItem(image: #imageLiteral(resourceName: "filterApllied"),
-                                                    style: UIBarButtonItem.Style.plain,
-                                                    target: self, action: #selector(filter))
-
     
     private var viewModel: HomeViewModel
     
@@ -60,7 +56,10 @@ final class HomeViewController: UIViewController{
     }
 
     func setUpNavBar(){
-        navigationItem.rightBarButtonItem = filterButton
+        navigationItem.rightBarButtonItem = viewSource.filterBarButton
+        navigationItem.leftBarButtonItem = viewSource.trashBarButton
+        viewSource.filterButton.addTarget(self, action: #selector(filter), for: .touchUpInside)
+        viewSource.trashButton.addTarget(self, action: #selector(clean), for: .touchUpInside)
         navigationItem.searchController = viewSource.searchController
         self.title = "MovieS"
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2431372549, green: 0.2431372549, blue: 0.2431372549, alpha: 1)
@@ -73,6 +72,16 @@ final class HomeViewController: UIViewController{
         let controller = FilterViewController(with: viewModel.genres, sortingType: viewModel.sortingType)
         controller.delegate = self
         navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @objc func clean() {
+        viewModel.isFiltered = false
+        viewModel.fetchMovies { [weak self] in
+            guard self == self else {return}
+            DispatchQueue.main.async {
+                self?.viewSource.tableView.reloadData()
+            }
+        }
     }
     
     func refreshUI(){
@@ -139,3 +148,19 @@ extension HomeViewController: UISearchBarDelegate {
         }
     }
 }
+//
+//extension HomeViewController: UISearchResultsUpdating {
+//    func updateSearchResults(for searchController: UISearchController) {
+//        guard let movies = viewModel.filteredMovieListData?.movies else {return}
+//        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
+//            viewModel.isSearched = true
+//            viewModel.filteredMovieListData?.movies = movies.filter { movie in
+//                return movie.title.lowercased().contains(searchText.lowercased())
+//            }
+//        } else {
+//            viewModel.searchedMovieListData?.movies = movies
+//        }
+//        viewSource.tableView.reloadData()
+//    }
+//}
+
