@@ -16,7 +16,7 @@ final class HomeViewController: UIViewController{
         viewSource.tableView.dataSource = self
         viewSource.tableView.delegate = self
         viewSource.searchController.searchBar.delegate = self
-//        viewSource.searchController.searchResultsUpdater = self
+        viewSource.searchController.searchResultsUpdater = self
         return viewSource
     }()
     
@@ -148,19 +148,19 @@ extension HomeViewController: UISearchBarDelegate {
         }
     }
 }
-//
-//extension HomeViewController: UISearchResultsUpdating {
-//    func updateSearchResults(for searchController: UISearchController) {
-//        guard let movies = viewModel.filteredMovieListData?.movies else {return}
-//        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
-//            viewModel.isSearched = true
-//            viewModel.filteredMovieListData?.movies = movies.filter { movie in
-//                return movie.title.lowercased().contains(searchText.lowercased())
-//            }
-//        } else {
-//            viewModel.searchedMovieListData?.movies = movies
-//        }
-//        viewSource.tableView.reloadData()
-//    }
-//}
+
+extension HomeViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let movies = viewModel.filteredMovieListData?.movies else {return}
+        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
+            viewModel.isSearched = true
+            viewModel.filteredMovieListData?.movies = movies.filter { movie in
+                return movie.title.lowercased().contains(searchText.lowercased())
+            }
+        } else {
+            viewModel.searchedMovieListData?.movies = movies
+        }
+        viewSource.tableView.reloadData()
+    }
+}
 

@@ -12,7 +12,7 @@ struct GenreList: Decodable {
     let genres: [MovieGenre]
 }
 
-struct MovieGenre: Codable {
+struct MovieGenre: Decodable {
     let id: Int
     let name: String
     
@@ -20,9 +20,15 @@ struct MovieGenre: Codable {
         case id = "id"
         case name = "name"
     }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        id = try values.decode(Int.self, forKey: .id)
+        name = try values.decode(String.self, forKey: .name)
+    }
 }
 
-extension MovieGenre:Equatable{
+extension MovieGenre: Equatable{
     static func == (lhs: MovieGenre, rhs: MovieGenre) -> Bool {
         return lhs.id == rhs.id
     }
