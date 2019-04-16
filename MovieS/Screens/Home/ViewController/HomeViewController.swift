@@ -12,7 +12,7 @@ final class HomeViewController: UIViewController{
 
     //MARK: - Properties
     private lazy var viewSource: HomeView = {
-        let viewSource = HomeView(isFilterButtonHide: false, isTrashButtonHide: false)
+        let viewSource = HomeView()
         viewSource.tableView.dataSource = self
         viewSource.tableView.delegate = self
         viewSource.searchController.searchBar.delegate = self
@@ -23,9 +23,18 @@ final class HomeViewController: UIViewController{
     private var viewModel: HomeViewModel
     
     // MARK: - Initialization
-    init() {
+    init(isFilterButtonHidden : Bool, buttonType: ButtonType) {
         viewModel = HomeViewModel()
         super.init(nibName: nil, bundle: nil)
+        viewSource.filterButton.isHidden = isFilterButtonHidden
+        switch buttonType {
+        case .trash:
+            viewSource.trashButton.isHidden = false
+            navigationItem.leftBarButtonItem = viewSource.trashBarButton
+        case .back:
+            viewSource.trashButton.isHidden = true
+            navigationItem.leftBarButtonItem = viewSource.backBarButton
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -57,9 +66,9 @@ final class HomeViewController: UIViewController{
 
     func setUpNavBar(){
         navigationItem.rightBarButtonItem = viewSource.filterBarButton
-        navigationItem.leftBarButtonItem = viewSource.trashBarButton
         viewSource.filterButton.addTarget(self, action: #selector(filter), for: .touchUpInside)
         viewSource.trashButton.addTarget(self, action: #selector(clean), for: .touchUpInside)
+        viewSource.backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
         navigationItem.searchController = viewSource.searchController
         self.title = "MovieS"
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2431372549, green: 0.2431372549, blue: 0.2431372549, alpha: 1)
@@ -84,6 +93,10 @@ final class HomeViewController: UIViewController{
         }
         viewModel.genres = []
         viewModel.sortingType = .byPopularity
+    }
+    
+    @objc func back(){
+        self.navigationController?.popViewController(animated: true)
     }
     
     func refreshUI(){
@@ -166,3 +179,7 @@ extension HomeViewController: UISearchResultsUpdating {
     }
 }
 
+enum ButtonType {
+    case trash
+    case back
+}

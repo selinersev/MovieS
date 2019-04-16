@@ -60,7 +60,8 @@ final class DiscoverViewController: UIViewController {
 // MARK: - CollectionView Delegate
 extension DiscoverViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    
+        let controller = HomeViewController(isFilterButtonHidden: true, buttonType: .back)
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
 

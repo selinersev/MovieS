@@ -56,6 +56,16 @@ final class HomeView: UIView {
         return view
     }()
     
+    private(set) lazy var backButton: UIButton = {
+        let view = UIButton()
+        view.setImage(#imageLiteral(resourceName: "back"), for: .normal)
+        view.frame = CGRect(x: 0, y: 0, width: 27, height: 27)
+        constrain(view) { x in
+            x.height == 27.0
+            x.width == 27.0
+        }
+        return view
+    }()
     
     private(set) lazy var filterBarButton: UIBarButtonItem = {
         let barButton = UIBarButtonItem.init(customView: filterButton)
@@ -67,11 +77,14 @@ final class HomeView: UIView {
         return barButton
     }()
     
+    private(set) lazy var backBarButton: UIBarButtonItem = {
+        let barButton = UIBarButtonItem.init(customView: backButton)
+        return barButton
+    }()
+    
     // MARK: - Initialization
-    init(isFilterButtonHide: Bool, isTrashButtonHide: Bool) {
+    init() {
         super.init(frame: .zero)
-        filterButton.isHidden = isFilterButtonHide
-        trashButton.isHidden = isTrashButtonHide
         addSubview(tableView)
         arrangeViews()
     }
