@@ -13,38 +13,38 @@ final class HomeViewModel {
     var movieListData: MovieList?
     var filteredMovieListData: MovieList?
     var searchedMovieListData: MovieList?
-    var isFiltered = false
-    var isSearched = false
+    
+    var state: State = .normal
     
     var sortingType: SortingType = .byPopularity
     var genres = [MovieGenre]()
     private let sessionProvider = URLSessionProvider()
     
     func getRowCount(for section: Int) ->Int{
-        if isSearched == true {
-            guard let moviesCount = searchedMovieListData?.movies.count else {return 0}
-            return moviesCount
-        }
-        if isFiltered == true {
+        switch state {
+        case .isFiltered:
             guard let moviesCount = filteredMovieListData?.movies.count else {return 0}
             return moviesCount
-        }else {
+        case .isSearched:
+            guard let moviesCount = searchedMovieListData?.movies.count else {return 0}
+            return moviesCount
+        default:
             guard let moviesCount = movieListData?.movies.count else {return 0}
             return moviesCount
         }
     }
     
     func getMovie(for indexPath: IndexPath) -> Movie? {
-        if isSearched == true {
-            guard let moviesCount = searchedMovieListData?.movies.count else {return nil}
-            guard moviesCount > indexPath.row else {return nil}
-            return searchedMovieListData?.movies[indexPath.row]
-        }
-        if isFiltered == true {
+        switch state {
+        case .isFiltered:
             guard let moviesCount = filteredMovieListData?.movies.count else {return nil}
             guard moviesCount > indexPath.row else {return nil}
             return filteredMovieListData?.movies[indexPath.row]
-        }else {
+        case .isSearched:
+            guard let moviesCount = searchedMovieListData?.movies.count else {return nil}
+            guard moviesCount > indexPath.row else {return nil}
+            return searchedMovieListData?.movies[indexPath.row]
+        default:
             guard let moviesCount = movieListData?.movies.count else {return nil}
             guard moviesCount > indexPath.row else {return nil}
             return movieListData?.movies[indexPath.row]
@@ -92,4 +92,10 @@ final class HomeViewModel {
             }
         }
     }
+}
+
+enum State {
+    case isSearched
+    case isFiltered
+    case normal
 }

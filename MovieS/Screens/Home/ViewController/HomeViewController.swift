@@ -12,7 +12,7 @@ final class HomeViewController: UIViewController{
 
     //MARK: - Properties
     private lazy var viewSource: HomeView = {
-        let viewSource = HomeView()
+        let viewSource = HomeView(isFilterButtonHide: false, isTrashButtonHide: false)
         viewSource.tableView.dataSource = self
         viewSource.tableView.delegate = self
         viewSource.searchController.searchBar.delegate = self
@@ -51,7 +51,7 @@ final class HomeViewController: UIViewController{
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        guard !viewModel.isFiltered else { return }
+        guard !(viewModel.state == .isFiltered) else { return }
         viewSource.tableView.reloadData()
     }
 
@@ -75,13 +75,15 @@ final class HomeViewController: UIViewController{
     }
     
     @objc func clean() {
-        viewModel.isFiltered = false
+        viewModel.state = .normal
         viewModel.fetchMovies { [weak self] in
             guard self == self else {return}
             DispatchQueue.main.async {
                 self?.viewSource.tableView.reloadData()
             }
         }
+        viewModel.genres = []
+        viewModel.sortingType = .byPopularity
     }
     
     func refreshUI(){
@@ -98,7 +100,7 @@ extension HomeViewController: FilterViewControllerDelegate{
     func sendFilterOptions(sortingType: SortingType, genres: [MovieGenre], filtered: Bool) {
         viewModel.sortingType = sortingType
         viewModel.genres = genres
-        viewModel.isFiltered = filtered
+        viewModel.state = .isFiltered
         refreshUI()
     }
 }
@@ -127,7 +129,7 @@ extension HomeViewController: UITableViewDelegate{
 
 extension HomeViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel.isSearched = true
+        viewModel.state = .isSearched
         viewModel.search(searchText: searchText) {
             DispatchQueue.main.async {
                 self.viewSource.tableView.reloadData()
@@ -136,7 +138,7 @@ extension HomeViewController: UISearchBarDelegate {
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        viewModel.isSearched = false
+        viewModel.state = .normal
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -151,9 +153,9 @@ extension HomeViewController: UISearchBarDelegate {
 
 extension HomeViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
+        viewModel.state = .isFiltered
         guard let movies = viewModel.filteredMovieListData?.movies else {return}
         if let searchText = searchController.searchBar.text, !searchText.isEmpty {
-            viewModel.isSearched = true
             viewModel.filteredMovieListData?.movies = movies.filter { movie in
                 return movie.title.lowercased().contains(searchText.lowercased())
             }

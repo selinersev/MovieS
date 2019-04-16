@@ -68,8 +68,10 @@ final class HomeView: UIView {
     }()
     
     // MARK: - Initialization
-    init() {
+    init(isFilterButtonHide: Bool, isTrashButtonHide: Bool) {
         super.init(frame: .zero)
+        filterButton.isHidden = isFilterButtonHide
+        trashButton.isHidden = isTrashButtonHide
         addSubview(tableView)
         arrangeViews()
     }

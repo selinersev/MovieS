@@ -6,7 +6,6 @@
 //  Copyright © 2019 Selin Ersev. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 final class FilterViewModel {

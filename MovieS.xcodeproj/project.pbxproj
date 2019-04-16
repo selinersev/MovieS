@@ -14,6 +14,12 @@
 		10D88096225F6517001E63F7 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D88095225F6517001E63F7 /* Protocols.swift */; };
 		10D88098225F657A001E63F7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D88097225F657A001E63F7 /* Extensions.swift */; };
 		10D8809A225F66FC001E63F7 /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D88099225F66FC001E63F7 /* MovieService.swift */; };
+		10D880A42265F6E9001E63F7 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D880A32265F6E9001E63F7 /* TabBarViewController.swift */; };
+		10D880A72265F968001E63F7 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D880A62265F968001E63F7 /* DiscoverViewController.swift */; };
+		10D880B522660DB0001E63F7 /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D880B422660DB0001E63F7 /* DiscoverView.swift */; };
+		10D880B822660E3D001E63F7 /* DiscoverCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D880B722660E3D001E63F7 /* DiscoverCollectionViewCell.swift */; };
+		10D880BB22662264001E63F7 /* DiscoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D880BA22662264001E63F7 /* DiscoverViewModel.swift */; };
+		10D880BE22662308001E63F7 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D880BD22662308001E63F7 /* UIColor.swift */; };
 		1B6291162201DAF900BEA104 /* GenreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6291152201DAF900BEA104 /* GenreModel.swift */; };
 		1B62911B22082E7400BEA104 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B62911A22082E7400BEA104 /* UITableView.swift */; };
 		1BA3588021EE1E57003E501B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA3587F21EE1E57003E501B /* AppDelegate.swift */; };
@@ -44,6 +50,12 @@
 		10D88095225F6517001E63F7 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		10D88097225F657A001E63F7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		10D88099225F66FC001E63F7 /* MovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
+		10D880A32265F6E9001E63F7 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		10D880A62265F968001E63F7 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
+		10D880B422660DB0001E63F7 /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
+		10D880B722660E3D001E63F7 /* DiscoverCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewCell.swift; sourceTree = "<group>"; };
+		10D880BA22662264001E63F7 /* DiscoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewModel.swift; sourceTree = "<group>"; };
+		10D880BD22662308001E63F7 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		1B6291152201DAF900BEA104 /* GenreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreModel.swift; sourceTree = "<group>"; };
 		1B62911A22082E7400BEA104 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		1BA3587C21EE1E57003E501B /* MovieS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +114,65 @@
 			path = "Network Layer";
 			sourceTree = "<group>";
 		};
+		10D880A22265F6C2001E63F7 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				10D880A32265F6E9001E63F7 /* TabBarViewController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		10D880A52265F955001E63F7 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				10D880B922662250001E63F7 /* ViewModel */,
+				10D880B622660E27001E63F7 /* Cell */,
+				10D880B322660D9C001E63F7 /* View */,
+				10D880B222660D93001E63F7 /* ViewController */,
+				10D880A62265F968001E63F7 /* DiscoverViewController.swift */,
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
+		10D880B222660D93001E63F7 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		10D880B322660D9C001E63F7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				10D880B422660DB0001E63F7 /* DiscoverView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		10D880B622660E27001E63F7 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				10D880B722660E3D001E63F7 /* DiscoverCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		10D880B922662250001E63F7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				10D880BA22662264001E63F7 /* DiscoverViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		10D880BC226622F1001E63F7 /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				10D880BD22662308001E63F7 /* UIColor.swift */,
+			);
+			path = Color;
+			sourceTree = "<group>";
+		};
 		1B62911922082E1600BEA104 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +223,8 @@
 		1BA3589B21F1D734003E501B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				10D880A52265F955001E63F7 /* Discover */,
+				10D880A22265F6C2001E63F7 /* TabBar */,
 				1BA358AB21F2038E003E501B /* Filter */,
 				1BA3589E21F1D764003E501B /* Detail */,
 				1BA3589D21F1D755003E501B /* Home */,
@@ -284,6 +357,7 @@
 		1BB5F6BA21FF2C430075D567 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				10D880BC226622F1001E63F7 /* Color */,
 				1B62911922082E1600BEA104 /* TableView */,
 				1BB5F6C121FF45390075D567 /* Label */,
 				1BB5F6BB21FF2C4F0075D567 /* StackView */,
@@ -457,10 +531,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				1046834422578E3800DC17D6 /* MovieTableViewCell.swift in Sources */,
+				10D880BB22662264001E63F7 /* DiscoverViewModel.swift in Sources */,
 				1BA358A421F1D7C0003E501B /* HomeViewController.swift in Sources */,
 				1BB5F6BD21FF2C660075D567 /* UIStackViewExtension.swift in Sources */,
 				1BA358B121F21072003E501B /* DetailView.swift in Sources */,
 				10D8809A225F66FC001E63F7 /* MovieService.swift in Sources */,
+				10D880A72265F968001E63F7 /* DiscoverViewController.swift in Sources */,
+				10D880B822660E3D001E63F7 /* DiscoverCollectionViewCell.swift in Sources */,
 				1B6291162201DAF900BEA104 /* GenreModel.swift in Sources */,
 				1BA358A821F1D856003E501B /* HomeView.swift in Sources */,
 				1B62911B22082E7400BEA104 /* UITableView.swift in Sources */,
@@ -469,11 +546,14 @@
 				104683462257CFC600DC17D6 /* SearchTableViewCell.swift in Sources */,
 				1BB5F6C421FF45560075D567 /* UILabelExtension.swift in Sources */,
 				1BA358B421F248E6003E501B /* DetailViewModel.swift in Sources */,
+				10D880A42265F6E9001E63F7 /* TabBarViewController.swift in Sources */,
 				1BB5F6B221F9FC680075D567 /* FilterViewController.swift in Sources */,
 				1BB5F6B921FAFE4C0075D567 /* SortingOptionsTableViewCell.swift in Sources */,
+				10D880BE22662308001E63F7 /* UIColor.swift in Sources */,
 				10D88090225F5F14001E63F7 /* URLSessionProvider.swift in Sources */,
 				1BA358A621F1D821003E501B /* HomeViewModel.swift in Sources */,
 				1BA358B621F24924003E501B /* DetailViewController.swift in Sources */,
+				10D880B522660DB0001E63F7 /* DiscoverView.swift in Sources */,
 				10D88096225F6517001E63F7 /* Protocols.swift in Sources */,
 				10D88098225F657A001E63F7 /* Extensions.swift in Sources */,
 				1BA3588021EE1E57003E501B /* AppDelegate.swift in Sources */,
