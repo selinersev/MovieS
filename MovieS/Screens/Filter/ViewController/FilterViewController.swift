@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FilterViewControllerDelegate: class {
-    func sendFilterOptions(sortingType: SortingType, genres: [MovieGenre], filtered: Bool)
+    func sendFilterOptions(sortingType: SortingType, genres: [MovieGenre])
 }
 
 final class FilterViewController: UIViewController {
@@ -53,7 +53,7 @@ final class FilterViewController: UIViewController {
     }
     
     @objc func filterButtonAction(){
-        delegate?.sendFilterOptions(sortingType: viewModel.selectedSortingType , genres: viewModel.selectedGenres, filtered: true)
+        delegate?.sendFilterOptions(sortingType: viewModel.selectedSortingType , genres: viewModel.selectedGenres)
         print(viewModel.selectedSortingType.serviceParam)
         print(viewModel.selectedGenres)
         navigationController?.popViewController(animated: true)

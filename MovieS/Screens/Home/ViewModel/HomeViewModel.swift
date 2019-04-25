@@ -13,8 +13,10 @@ final class HomeViewModel {
     var movieListData: MovieList?
     var filteredMovieListData: MovieList?
     var searchedMovieListData: MovieList?
+    var discoverListData: MovieList?
     
     var state: State = .normal
+    var tabBarState: TabBarState = .search
     
     var sortingType: SortingType = .byPopularity
     var genres = [MovieGenre]()
@@ -29,8 +31,13 @@ final class HomeViewModel {
             guard let moviesCount = searchedMovieListData?.movies.count else {return 0}
             return moviesCount
         default:
-            guard let moviesCount = movieListData?.movies.count else {return 0}
-            return moviesCount
+            if tabBarState == .search {
+                guard let moviesCount = movieListData?.movies.count else {return 0}
+                return moviesCount
+            } else {
+                guard let moviesCount = discoverListData?.movies.count else {return 0}
+                return moviesCount
+            }
         }
     }
     
@@ -45,9 +52,15 @@ final class HomeViewModel {
             guard moviesCount > indexPath.row else {return nil}
             return searchedMovieListData?.movies[indexPath.row]
         default:
-            guard let moviesCount = movieListData?.movies.count else {return nil}
-            guard moviesCount > indexPath.row else {return nil}
-            return movieListData?.movies[indexPath.row]
+            if tabBarState == .search {
+                guard let moviesCount = movieListData?.movies.count else {return nil}
+                guard moviesCount > indexPath.row else {return nil}
+                return movieListData?.movies[indexPath.row]
+            } else {
+                guard let moviesCount = discoverListData?.movies.count else {return nil}
+                guard moviesCount > indexPath.row else {return nil}
+                return discoverListData?.movies[indexPath.row]
+            }
         }
     }
     
@@ -61,7 +74,11 @@ final class HomeViewModel {
         sessionProvider.request(type: MovieList.self, service: MovieService.filter(params: params)) { response in
             switch response {
             case let .success(movies):
-                self.filteredMovieListData = movies
+                if self.tabBarState == .search {
+                    self.filteredMovieListData = movies
+                } else {
+                    self.discoverListData = movies
+                }
                 dataFetched()
             case let .failure(error):
                 print(error)
@@ -98,4 +115,9 @@ enum State {
     case isSearched
     case isFiltered
     case normal
+}
+
+enum TabBarState {
+    case search
+    case discover
 }

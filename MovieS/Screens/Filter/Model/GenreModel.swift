@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct GenreList: Decodable {
+struct GenreList: Codable {
     let genres: [MovieGenre]
 }
 
-struct MovieGenre: Decodable {
+struct MovieGenre: Codable {
     let id: Int
     let name: String
     
@@ -21,11 +21,11 @@ struct MovieGenre: Decodable {
         case name = "name"
     }
     
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        id = try values.decode(Int.self, forKey: .id)
-        name = try values.decode(String.self, forKey: .name)
-    }
+//    init(from decoder: Decoder) throws {
+//        let values = try decoder.container(keyedBy: CodingKeys.self)
+//        id = try values.decode(Int.self, forKey: .id)
+//        name = try values.decode(String.self, forKey: .name)
+//    }
 }
 
 extension MovieGenre: Equatable{

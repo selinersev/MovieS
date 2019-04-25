@@ -19,7 +19,7 @@ final class TabBarController: UITabBarController {
     }
     
     func setUpTabBar() {
-        let searchController = createNavController(vc: HomeViewController(isFilterButtonHidden: false, buttonType: .trash), selected: "searchIcon.png", unselected: "searchIcon.png")
+        let searchController = createNavController(vc: HomeViewController(tabBarState: .search, genres: []), selected: "searchIcon.png", unselected: "searchIcon.png")
         let discoverController = createNavController(vc: DiscoverViewController(), selected: "discover.png", unselected: "discover.png")
     
         viewControllers = [searchController, discoverController]

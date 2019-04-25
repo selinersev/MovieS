@@ -21,18 +21,20 @@ final class HomeViewController: UIViewController{
     }()
     
     private var viewModel: HomeViewModel
-    
     // MARK: - Initialization
-    init(isFilterButtonHidden : Bool, buttonType: ButtonType) {
+    init(tabBarState: TabBarState, genres: [MovieGenre]) {
         viewModel = HomeViewModel()
+        viewModel.genres = genres
+        viewModel.tabBarState = tabBarState
         super.init(nibName: nil, bundle: nil)
-        viewSource.filterButton.isHidden = isFilterButtonHidden
-        switch buttonType {
-        case .trash:
-            viewSource.trashButton.isHidden = false
+        switch tabBarState {
+        case .search:
             navigationItem.leftBarButtonItem = viewSource.trashBarButton
-        case .back:
+            viewSource.filterButton.isHidden = false
+            viewSource.trashButton.isHidden = false
+        case .discover:
             viewSource.trashButton.isHidden = true
+            viewSource.filterButton.isHidden = true
             navigationItem.leftBarButtonItem = viewSource.backBarButton
         }
     }
@@ -51,12 +53,24 @@ final class HomeViewController: UIViewController{
         viewSource.searchController.hidesNavigationBarDuringPresentation = true
         self.definesPresentationContext = true
         setUpNavBar()
-        viewModel.fetchMovies { [weak self] in
-            guard self == self else {return}
-            DispatchQueue.main.async {
-                self?.viewSource.tableView.reloadData()
+        switch viewModel.tabBarState {
+        case .search:
+            viewModel.fetchMovies { [weak self] in
+                guard self == self else {return}
+                DispatchQueue.main.async {
+                    self?.viewSource.tableView.reloadData()
+                }
+            }
+        case .discover:
+            viewModel.fetchFilteredMovies { [weak self] in
+                guard self == self else {return}
+                DispatchQueue.main.async {
+                    self?.viewSource.tableView.reloadData()
+                }
             }
         }
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -110,7 +124,7 @@ final class HomeViewController: UIViewController{
 }
 
 extension HomeViewController: FilterViewControllerDelegate{
-    func sendFilterOptions(sortingType: SortingType, genres: [MovieGenre], filtered: Bool) {
+    func sendFilterOptions(sortingType: SortingType, genres: [MovieGenre]) {
         viewModel.sortingType = sortingType
         viewModel.genres = genres
         viewModel.state = .isFiltered
