@@ -86,7 +86,6 @@ final class DetailView: UIView {
     func populateUI(movie: Movie){
         titleLabel.text = movie.title
         overviewLabel.text = movie.overview
-        //genreLabel.text = movie.genreIDs as? String
         guard let rate = movie.voteAverage else {return}
         rateLabel.text = String(rate)
         guard let urlString = movie.fullImageURL, let url = URL(string: urlString) else {return}

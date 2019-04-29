@@ -13,11 +13,7 @@ final class DiscoverViewModel {
     // MARK: - Properties
     private let sessionProvider = URLSessionProvider()
     private(set) var genreListData: GenreList?
-    
-    init() {
 
-    }
-    
     func getGenre(for indexPath: IndexPath) -> MovieGenre? {
         guard let genresCount = genreListData?.genres.count else {return nil}
         guard genresCount > indexPath.row else {return nil}

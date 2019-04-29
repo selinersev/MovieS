@@ -18,7 +18,6 @@ final class FilterView: UIView {
         tableView.sectionHeaderHeight = UITableView.automaticDimension
         tableView.estimatedSectionHeaderHeight = 40.0
         tableView.backgroundColor = #colorLiteral(red: 0.337254902, green: 0.337254902, blue: 0.337254902, alpha: 1)
-        //tableView.separatorInset = UIEdgeInsets.init(top: tableView.rowHeight, left: 0.0, bottom: 0, right: 0.0)
         tableView.register(FilterSwitchTableViewCell.self, forCellReuseIdentifier: "FilterSwitchCell")
         tableView.register(SortingOptionsTableViewCell.self, forCellReuseIdentifier: "SortingCell")
         tableView.tableFooterView = footerView

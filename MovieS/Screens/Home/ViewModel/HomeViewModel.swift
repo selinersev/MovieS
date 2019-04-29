@@ -121,3 +121,8 @@ enum TabBarState {
     case search
     case discover
 }
+
+enum ButtonType {
+    case trash
+    case back
+}

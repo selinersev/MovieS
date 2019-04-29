@@ -129,7 +129,6 @@
 				10D880B622660E27001E63F7 /* Cell */,
 				10D880B322660D9C001E63F7 /* View */,
 				10D880B222660D93001E63F7 /* ViewController */,
-				10D880A62265F968001E63F7 /* DiscoverViewController.swift */,
 			);
 			path = Discover;
 			sourceTree = "<group>";
@@ -137,6 +136,7 @@
 		10D880B222660D93001E63F7 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				10D880A62265F968001E63F7 /* DiscoverViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -223,11 +223,11 @@
 		1BA3589B21F1D734003E501B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				10D880A52265F955001E63F7 /* Discover */,
-				10D880A22265F6C2001E63F7 /* TabBar */,
-				1BA358AB21F2038E003E501B /* Filter */,
 				1BA3589E21F1D764003E501B /* Detail */,
+				10D880A52265F955001E63F7 /* Discover */,
+				1BA358AB21F2038E003E501B /* Filter */,
 				1BA3589D21F1D755003E501B /* Home */,
+				10D880A22265F6C2001E63F7 /* TabBar */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -291,9 +291,9 @@
 			children = (
 				1BB5F6C722002FED0075D567 /* Cells */,
 				1BA358B921F5AE86003E501B /* Model */,
-				1BA358B821F5AE7B003E501B /* ViewModel */,
-				1BA358B721F5AE6C003E501B /* ViewController */,
 				1BA358B221F248CF003E501B /* View */,
+				1BA358B721F5AE6C003E501B /* ViewController */,
+				1BA358B821F5AE7B003E501B /* ViewModel */,
 			);
 			path = Filter;
 			sourceTree = "<group>";

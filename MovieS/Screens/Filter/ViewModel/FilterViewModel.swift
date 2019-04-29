@@ -56,8 +56,6 @@ final class FilterViewModel {
             selectedIndex += 1
         }
     }
-
-    
     
     func fetchGenres(dataFetched: @escaping ([MovieGenre]?) -> Void ){
         sessionProvider.request(type: GenreList.self, service: MovieService.getGenres) { response in

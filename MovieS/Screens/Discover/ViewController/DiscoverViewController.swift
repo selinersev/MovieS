@@ -16,7 +16,6 @@ final class DiscoverViewController: UIViewController {
         viewSource.collectionView.dataSource = self
         viewSource.collectionView.delegate = self
         return viewSource
-        
     }()
     
     private var viewModel: DiscoverViewModel

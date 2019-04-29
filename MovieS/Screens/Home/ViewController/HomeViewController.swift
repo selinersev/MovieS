@@ -16,11 +16,11 @@ final class HomeViewController: UIViewController{
         viewSource.tableView.dataSource = self
         viewSource.tableView.delegate = self
         viewSource.searchController.searchBar.delegate = self
-        viewSource.searchController.searchResultsUpdater = self
         return viewSource
     }()
     
     private var viewModel: HomeViewModel
+    
     // MARK: - Initialization
     init(tabBarState: TabBarState, genres: [MovieGenre]) {
         viewModel = HomeViewModel()
@@ -69,8 +69,6 @@ final class HomeViewController: UIViewController{
                 }
             }
         }
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -91,6 +89,15 @@ final class HomeViewController: UIViewController{
                                                                         NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.bold)]
     }
 
+    func refreshUI(){
+        viewModel.fetchFilteredMovies { [weak self] in
+            guard self == self else {return}
+            DispatchQueue.main.async {
+                self?.viewSource.tableView.reloadData()
+            }
+        }
+    }
+    
     @objc func filter() {
         let controller = FilterViewController(with: viewModel.genres, sortingType: viewModel.sortingType)
         controller.delegate = self
@@ -111,15 +118,6 @@ final class HomeViewController: UIViewController{
     
     @objc func back(){
         self.navigationController?.popViewController(animated: true)
-    }
-    
-    func refreshUI(){
-        viewModel.fetchFilteredMovies { [weak self] in
-            guard self == self else {return}
-            DispatchQueue.main.async {
-                self?.viewSource.tableView.reloadData()
-            }
-        }
     }
 }
 
@@ -156,44 +154,35 @@ extension HomeViewController: UITableViewDelegate{
 
 extension HomeViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel.state = .isSearched
-        viewModel.search(searchText: searchText) {
-            DispatchQueue.main.async {
-                self.viewSource.tableView.reloadData()
+        if viewModel.state == .isFiltered{
+            guard let movies = viewModel.filteredMovieListData?.movies else {return}
+            if !searchText.isEmpty {
+                viewModel.filteredMovieListData?.movies = movies.filter { movie in
+                    return movie.title.lowercased().contains(searchText.lowercased())
+                }
+            } else {
+                viewModel.searchedMovieListData?.movies = movies
+            }
+            viewSource.tableView.reloadData()
+        }else{
+            viewModel.state = .isSearched
+            viewModel.search(searchText: searchText) {
+                DispatchQueue.main.async {
+                    self.viewSource.tableView.reloadData()
+                }
             }
         }
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        viewModel.state = .normal
+        if (viewModel.state == .isFiltered) {
+            refreshUI()
+            
+        }else {
+            viewModel.state = .normal
+        }
+         viewSource.tableView.reloadData()
     }
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        viewModel.fetchMovies { [weak self] in
-            guard self == self else {return}
-            DispatchQueue.main.async {
-                self?.viewSource.tableView.reloadData()
-            }
-        }
-    }
-}
 
-extension HomeViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        viewModel.state = .isFiltered
-        guard let movies = viewModel.filteredMovieListData?.movies else {return}
-        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
-            viewModel.filteredMovieListData?.movies = movies.filter { movie in
-                return movie.title.lowercased().contains(searchText.lowercased())
-            }
-        } else {
-            viewModel.searchedMovieListData?.movies = movies
-        }
-        viewSource.tableView.reloadData()
-    }
-}
-
-enum ButtonType {
-    case trash
-    case back
 }
