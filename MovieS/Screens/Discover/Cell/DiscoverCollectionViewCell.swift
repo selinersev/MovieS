@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Cartography
 
 final class DiscoverCollectionViewCell: UICollectionViewCell {
     
@@ -16,10 +15,7 @@ final class DiscoverCollectionViewCell: UICollectionViewCell {
         let view = UIView()
         view.layer.cornerRadius = 45
         view.backgroundColor = .random
-        constrain(view){view in
-            view.height == 90
-            view.width == 90
-        }
+        view.sizeAnchor(width: 90, height: 90)
         view.addSubview(genreLabel)
         return view
     }()
@@ -37,15 +33,12 @@ final class DiscoverCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         addSubview(baseView)
-        constrain(genreLabel){genreLabel in
-            genreLabel.centerX == genreLabel.superview!.centerX
-            genreLabel.centerY == genreLabel.superview!.centerY
-            genreLabel.width == 90
-        }
-        constrain(baseView){baseView in
-            baseView.centerX == baseView.superview!.centerX
-            baseView.centerY == baseView.superview!.centerY
-        }
+        baseView.centerAnchor(centerY: self.centerYAnchor,
+                              centerX: self.centerXAnchor)
+        
+        genreLabel.sizeAnchor(width: 90)
+        genreLabel.centerAnchor(centerY: baseView.centerYAnchor,
+                                centerX: baseView.centerXAnchor)
     }
     
     required init?(coder aDecoder: NSCoder) {

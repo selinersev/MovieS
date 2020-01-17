@@ -15,4 +15,12 @@ extension UIColor {
                        blue: .random(in: 0...1),
                        alpha: 1.0)
     }
+    
+    class var lightGrayTextColor: UIColor {
+        return #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    }
+    
+    class var blackBackgroundColor: UIColor {
+        return #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    }
 }

@@ -3,12 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		1046834422578E3800DC17D6 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1046834322578E3800DC17D6 /* MovieTableViewCell.swift */; };
 		104683462257CFC600DC17D6 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104683452257CFC600DC17D6 /* SearchTableViewCell.swift */; };
+		104D605023D08909008400D3 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104D604F23D08909008400D3 /* UIViewExtension.swift */; };
 		10D88090225F5F14001E63F7 /* URLSessionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D8808F225F5F14001E63F7 /* URLSessionProvider.swift */; };
 		10D88094225F63F5001E63F7 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D88093225F63F5001E63F7 /* Enums.swift */; };
 		10D88096225F6517001E63F7 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D88095225F6517001E63F7 /* Protocols.swift */; };
@@ -19,7 +20,7 @@
 		10D880B522660DB0001E63F7 /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D880B422660DB0001E63F7 /* DiscoverView.swift */; };
 		10D880B822660E3D001E63F7 /* DiscoverCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D880B722660E3D001E63F7 /* DiscoverCollectionViewCell.swift */; };
 		10D880BB22662264001E63F7 /* DiscoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D880BA22662264001E63F7 /* DiscoverViewModel.swift */; };
-		10D880BE22662308001E63F7 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D880BD22662308001E63F7 /* UIColor.swift */; };
+		10D880BE22662308001E63F7 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D880BD22662308001E63F7 /* UIColorExtension.swift */; };
 		1B6291162201DAF900BEA104 /* GenreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6291152201DAF900BEA104 /* GenreModel.swift */; };
 		1B62911B22082E7400BEA104 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B62911A22082E7400BEA104 /* UITableView.swift */; };
 		1BA3588021EE1E57003E501B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA3587F21EE1E57003E501B /* AppDelegate.swift */; };
@@ -45,6 +46,7 @@
 /* Begin PBXFileReference section */
 		1046834322578E3800DC17D6 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		104683452257CFC600DC17D6 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		104D604F23D08909008400D3 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		10D8808F225F5F14001E63F7 /* URLSessionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProvider.swift; sourceTree = "<group>"; };
 		10D88093225F63F5001E63F7 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		10D88095225F6517001E63F7 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -55,7 +57,7 @@
 		10D880B422660DB0001E63F7 /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
 		10D880B722660E3D001E63F7 /* DiscoverCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewCell.swift; sourceTree = "<group>"; };
 		10D880BA22662264001E63F7 /* DiscoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewModel.swift; sourceTree = "<group>"; };
-		10D880BD22662308001E63F7 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		10D880BD22662308001E63F7 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		1B6291152201DAF900BEA104 /* GenreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreModel.swift; sourceTree = "<group>"; };
 		1B62911A22082E7400BEA104 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		1BA3587C21EE1E57003E501B /* MovieS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +102,14 @@
 				104683452257CFC600DC17D6 /* SearchTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		104D605123D0891B008400D3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				104D604F23D08909008400D3 /* UIViewExtension.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		10D88079225DE7C0001E63F7 /* Network Layer */ = {
@@ -168,7 +178,7 @@
 		10D880BC226622F1001E63F7 /* Color */ = {
 			isa = PBXGroup;
 			children = (
-				10D880BD22662308001E63F7 /* UIColor.swift */,
+				10D880BD22662308001E63F7 /* UIColorExtension.swift */,
 			);
 			path = Color;
 			sourceTree = "<group>";
@@ -357,6 +367,7 @@
 		1BB5F6BA21FF2C430075D567 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				104D605123D0891B008400D3 /* View */,
 				10D880BC226622F1001E63F7 /* Color */,
 				1B62911922082E1600BEA104 /* TableView */,
 				1BB5F6C121FF45390075D567 /* Label */,
@@ -425,6 +436,8 @@
 			dependencies = (
 			);
 			name = MovieS;
+			packageProductDependencies = (
+			);
 			productName = MovieS;
 			productReference = 1BA3587C21EE1E57003E501B /* MovieS.app */;
 			productType = "com.apple.product-type.application";
@@ -453,6 +466,8 @@
 				Base,
 			);
 			mainGroup = 1BA3587321EE1E57003E501B;
+			packageReferences = (
+			);
 			productRefGroup = 1BA3587D21EE1E57003E501B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -503,24 +518,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-MovieS/Pods-MovieS-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Cartography/Cartography.framework",
-				"${BUILT_PRODUCTS_DIR}/FaceAware/FaceAware.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-MovieS/Pods-MovieS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cartography.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FaceAware.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-MovieS/Pods-MovieS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovieS/Pods-MovieS-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MovieS/Pods-MovieS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -542,6 +548,7 @@
 				1BA358A821F1D856003E501B /* HomeView.swift in Sources */,
 				1B62911B22082E7400BEA104 /* UITableView.swift in Sources */,
 				1BB5F6B721FAFE350075D567 /* FilterSwitchTableViewCell.swift in Sources */,
+				104D605023D08909008400D3 /* UIViewExtension.swift in Sources */,
 				10D88094225F63F5001E63F7 /* Enums.swift in Sources */,
 				104683462257CFC600DC17D6 /* SearchTableViewCell.swift in Sources */,
 				1BB5F6C421FF45560075D567 /* UILabelExtension.swift in Sources */,
@@ -549,7 +556,7 @@
 				10D880A42265F6E9001E63F7 /* TabBarViewController.swift in Sources */,
 				1BB5F6B221F9FC680075D567 /* FilterViewController.swift in Sources */,
 				1BB5F6B921FAFE4C0075D567 /* SortingOptionsTableViewCell.swift in Sources */,
-				10D880BE22662308001E63F7 /* UIColor.swift in Sources */,
+				10D880BE22662308001E63F7 /* UIColorExtension.swift in Sources */,
 				10D88090225F5F14001E63F7 /* URLSessionProvider.swift in Sources */,
 				1BA358A621F1D821003E501B /* HomeViewModel.swift in Sources */,
 				1BA358B621F24924003E501B /* DetailViewController.swift in Sources */,
@@ -703,7 +710,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZSATZE2MZ7;
+				DEVELOPMENT_TEAM = X7D49H4356;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MovieS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -724,7 +731,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZSATZE2MZ7;
+				DEVELOPMENT_TEAM = X7D49H4356;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MovieS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

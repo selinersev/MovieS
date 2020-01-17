@@ -6,7 +6,7 @@
 //  Copyright © 2019 Selin Ersev. All rights reserved.
 //
 
-import Cartography
+import UIKit
 
 final class SortingOptionsTableViewCell: UITableViewCell {
     
@@ -15,10 +15,7 @@ final class SortingOptionsTableViewCell: UITableViewCell {
         let sortingIcon = UIImageView()
         sortingIcon.image = #imageLiteral(resourceName: "sort")
         sortingIcon.contentMode = .left
-        constrain(sortingIcon, block: {
-            $0.height == 18
-            $0.width == 14
-        })
+        sortingIcon.sizeAnchor(width: 14, height: 18)
         return sortingIcon
     }()
     
@@ -27,7 +24,7 @@ final class SortingOptionsTableViewCell: UITableViewCell {
         let font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.medium)
         label.font = font
         label.textAlignment = .left
-        label.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        label.textColor = .lightGrayTextColor
         return label
     }()
     
@@ -40,7 +37,7 @@ final class SortingOptionsTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         selectionStyle = .none
-        backgroundColor = #colorLiteral(red: 0.337254902, green: 0.337254902, blue: 0.337254902, alpha: 1)
+        backgroundColor = .blackBackgroundColor
         
         addSubview(stackView)
         arrangeViews()
@@ -52,12 +49,7 @@ final class SortingOptionsTableViewCell: UITableViewCell {
     
     //MARK - Arange Views
     private func arrangeViews() {
-        constrain(stackView) { stackView in
-            stackView.left == stackView.superview!.left + 15.0
-            stackView.right == stackView.superview!.right - 15.0
-            stackView.top == stackView.superview!.top + 10.0
-            stackView.bottom == stackView.superview!.bottom - 10.0
-        }
+        stackView.fillSuperview(with: UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15))
     }
     //MARK: - PopulateUI
     func populate(sortingOption: SortingType){

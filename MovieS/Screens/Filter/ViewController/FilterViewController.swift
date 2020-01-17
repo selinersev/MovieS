@@ -37,6 +37,8 @@ final class FilterViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
+    
     // MARK: - Lifecycle
     override func loadView() {
         view = viewSource
@@ -98,7 +100,7 @@ extension FilterViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 20))
-        headerView.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        headerView.backgroundColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
         return headerView
     }
     

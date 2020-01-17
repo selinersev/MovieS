@@ -6,7 +6,7 @@
 //  Copyright © 2019 Selin Ersev. All rights reserved.
 //
 
-import Cartography
+import UIKit
 
 final class HomeView: UIView {
     
@@ -15,7 +15,7 @@ final class HomeView: UIView {
         let tableView = UITableView()
         tableView.estimatedRowHeight = 50.0
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.backgroundColor = #colorLiteral(red: 0.337254902, green: 0.337254902, blue: 0.337254902, alpha: 1)
+        tableView.backgroundColor = .blackBackgroundColor
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
         tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "MovieCell")
@@ -26,8 +26,7 @@ final class HomeView: UIView {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Movies by Name"
-        searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.barTintColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        searchController.searchBar.barTintColor = .blackBackgroundColor
         let cancelButtonAttributes = [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.2745098039, green: 0.7882352941, blue: 0.7019607843, alpha: 1) ]
         UIBarButtonItem.appearance().setTitleTextAttributes(cancelButtonAttributes , for: .normal)
         searchController.searchBar.barStyle = .black
@@ -37,33 +36,21 @@ final class HomeView: UIView {
     private(set) lazy var filterButton: UIButton = {
         let view = UIButton()
         view.setImage(#imageLiteral(resourceName: "filterApllied"), for: .normal)
-        view.frame = CGRect(x: 0, y: 0, width: 27, height: 27)
-        constrain(view) { x in
-            x.height == 27.0
-            x.width == 27.0
-        }
+        view.sizeAnchor(width: 27, height: 27)
         return view
     }()
     
     private(set) lazy var trashButton: UIButton = {
-        let view = UIButton()
-        view.setImage(#imageLiteral(resourceName: "trash"), for: .normal)
-        view.frame = CGRect(x: 0, y: 0, width: 27, height: 27)
-        constrain(view) { x in
-            x.height == 27.0
-            x.width == 27.0
-        }
-        return view
+        let button = UIButton()
+        button.setTitle("Clear", for: .normal)
+        button.setTitleColor(.red, for: .normal)
+        return button
     }()
     
     private(set) lazy var backButton: UIButton = {
         let view = UIButton()
         view.setImage(#imageLiteral(resourceName: "back"), for: .normal)
-        view.frame = CGRect(x: 0, y: 0, width: 27, height: 27)
-        constrain(view) { x in
-            x.height == 27.0
-            x.width == 27.0
-        }
+        view.sizeAnchor(width: 27, height: 27)
         return view
     }()
     
@@ -96,8 +83,6 @@ final class HomeView: UIView {
     
     //MARK: - Arrange Views
     private func arrangeViews() {
-        constrain(tableView) { tableView in
-            tableView.edges == inset(tableView.superview!.edges, 0, 0, 0, 0)
-        }
+        tableView.fillSuperview()
     }
 }

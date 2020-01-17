@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Cartography
 import Kingfisher
 
 final class MovieTableViewCell: UITableViewCell {
@@ -24,7 +23,7 @@ final class MovieTableViewCell: UITableViewCell {
     
     private lazy var movieLabel: UILabel = {
         let movieLabel = UILabel()
-        movieLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        movieLabel.textColor = .lightGrayTextColor
         movieLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.bold)
         movieLabel.numberOfLines = 0
         return movieLabel
@@ -35,7 +34,7 @@ final class MovieTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         selectionStyle = .none
-        backgroundColor = #colorLiteral(red: 0.337254902, green: 0.337254902, blue: 0.337254902, alpha: 1)
+        backgroundColor = .blackBackgroundColor
         
         addSubview(movieLabel)
         addSubview(movieImage)
@@ -52,17 +51,16 @@ final class MovieTableViewCell: UITableViewCell {
     
     //MARK - Arange Views
     private func arrangeViews() {
-        constrain(movieImage, movieLabel) { movieImage, movieLabel in
-            movieImage.top == movieImage.superview!.top + 15
-            movieImage.bottom == movieImage.superview!.bottom - 15
-            movieImage.centerY == movieImage.superview!.centerY
-            movieImage.leading == movieImage.superview!.leading + 35
-            movieImage.width == 80
-            movieImage.height == 100
-            movieLabel.leading == movieImage.trailing + 50
-            movieLabel.trailing == movieLabel.superview!.trailing - 25
-            movieLabel.top == movieImage.top + 10
-        }
+        movieImage.anchor(top: self.topAnchor,
+                          leading: self.leadingAnchor,
+                          bottom: self.bottomAnchor,
+                          padding: UIEdgeInsets(top: 15, left: 35, bottom: 15, right: 0),
+                          size: CGSize(width: 80, height: 100))
+
+        movieLabel.anchor(top: movieImage.topAnchor,
+                          leading: movieImage.trailingAnchor,
+                          trailing: self.trailingAnchor,
+                          padding: UIEdgeInsets(top: 10, left: 50, bottom: 0, right: 25))
     }
     
     // MARK: - Populate UI

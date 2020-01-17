@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Cartography
 import Kingfisher
 
 final class DetailView: UIView {
@@ -15,6 +14,7 @@ final class DetailView: UIView {
     //MARK: - Properties
     private(set) lazy var poster: UIImageView = {
         let poster = UIImageView()
+        poster.sizeAnchor(width: 300, height: 350)
         poster.contentMode = .scaleAspectFit
         return poster
     }()
@@ -23,7 +23,7 @@ final class DetailView: UIView {
         let titleLabel = UILabel()
         let font: UIFont = .boldSystemFont(ofSize: 22.0)
         titleLabel.font = font
-        titleLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        titleLabel.textColor = .lightGrayTextColor
         return titleLabel
     }()
     
@@ -38,19 +38,26 @@ final class DetailView: UIView {
         let rateLabel = UILabel()
         let font: UIFont = .boldSystemFont(ofSize: 20.0)
         rateLabel.font = font
-        rateLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        rateLabel.textColor = .lightGrayTextColor
         return rateLabel
     }()
     
     private(set) lazy var overviewLabel: UILabel = {
         let overviewLabel = UILabel()
-        overviewLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        overviewLabel.textColor = .lightGrayTextColor
         overviewLabel.numberOfLines = 0
         return overviewLabel
     }()
     
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView.init(arrangedSubviews: [titleLabel,rateLabel,overviewLabel])
+    private lazy var titleStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [titleLabel,rateLabel,overviewLabel])
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        return stackView
+    }()
+    
+    private lazy var baseStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [poster,titleStackView])
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .fill
@@ -58,10 +65,18 @@ final class DetailView: UIView {
         return stackView
     }()
     
+    private(set) lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView(frame: .zero)
+        scrollView.alwaysBounceVertical = true
+        return scrollView
+    }()
+    
     // MARK: - Initialization
     init() {
         super.init(frame: .zero)
-        [poster,stackView].forEach(addSubview(_:))
+        backgroundColor = .blackBackgroundColor
+        addSubview(scrollView)
+        scrollView.addSubview(baseStackView)
         arrangeViews()
     }
     
@@ -71,16 +86,19 @@ final class DetailView: UIView {
     
     //MARK: - Arrange Views
     private func arrangeViews() {
-        constrain(stackView, poster) { stackView, poster in
-       
-            stackView.leading == stackView.superview!.leading + 25
-            stackView.top == poster.bottom + 40
-            stackView.trailing == stackView.superview!.trailing - 25
-            poster.leading == poster.superview!.leading + 25
-            poster.trailing == poster.superview!.trailing - 25
-            poster.top == poster.superview!.top + 150
-            poster.height == 300
-        }
+        scrollView.fillSuperview()
+
+        baseStackView.fillSuperview(with: UIEdgeInsets(
+            top: 15,
+            left: 0,
+            bottom: 10.0,
+            right: 0
+        ))
+        baseStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1).isActive = true
+        
+        titleStackView.anchor(leading: baseStackView.leadingAnchor,
+                              trailing: baseStackView.trailingAnchor,
+                              padding: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20))
     }
 
     func populateUI(movie: Movie){

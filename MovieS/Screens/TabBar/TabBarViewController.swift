@@ -13,10 +13,12 @@ final class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tabBar.barTintColor = .gray
+        tabBar.barTintColor = .blackBackgroundColor
         tabBar.tintColor = #colorLiteral(red: 0.2745098039, green: 0.7882352941, blue: 0.7019607843, alpha: 1)
         setUpTabBar()
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
     
     func setUpTabBar() {
         let searchController = createNavController(vc: HomeViewController(tabBarState: .search, genres: []), selected: "searchIcon.png", unselected: "searchIcon.png")

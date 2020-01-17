@@ -6,7 +6,7 @@
 //  Copyright © 2019 Selin Ersev. All rights reserved.
 //
 
-import Cartography
+import UIKit
 
 protocol FilterSwitchTableViewCellDelegate: class {
     func didSelect(genre:MovieGenre)
@@ -18,17 +18,14 @@ final class FilterSwitchTableViewCell: UITableViewCell{
     lazy var filterSwitch: UISwitch = {
         let filterSwitch = UISwitch()
         filterSwitch.onTintColor = #colorLiteral(red: 0.2745098039, green: 0.7882352941, blue: 0.7019607843, alpha: 1)
-        constrain(filterSwitch, block: {
-            $0.width == 50
-            $0.height == 30
-        })
+        filterSwitch.sizeAnchor(width: 50, height: 30)
         filterSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
         return filterSwitch
     }()
     
     private lazy var genreLabel: UILabel = {
         let label = UILabel()
-        label.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        label.textColor = .lightGrayTextColor
         return label
     }()
     
@@ -43,7 +40,7 @@ final class FilterSwitchTableViewCell: UITableViewCell{
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
-        backgroundColor = #colorLiteral(red: 0.337254902, green: 0.337254902, blue: 0.337254902, alpha: 1)
+        backgroundColor = .blackBackgroundColor
         
         addSubview(stackView)
         arrangeViews()
@@ -56,12 +53,7 @@ final class FilterSwitchTableViewCell: UITableViewCell{
     
     //MARK - Arange Views
     private func arrangeViews() {
-        constrain(stackView) { stackView in
-            stackView.left == stackView.superview!.left + 15.0
-            stackView.right == stackView.superview!.right - 15.0
-            stackView.top == stackView.superview!.top + 10.0
-            stackView.bottom == stackView.superview!.bottom - 10.0
-        }
+        stackView.fillSuperview(with: UIEdgeInsets(top: 10, left: 15, bottom: 19, right: 15))
     }
     
     //MARK: - PopulateUI

@@ -6,7 +6,7 @@
 //  Copyright © 2019 Selin Ersev. All rights reserved.
 //
 
-import Cartography
+import UIKit
 
 final class SearchTableViewCell: UITableViewCell {
 
@@ -17,16 +17,13 @@ final class SearchTableViewCell: UITableViewCell {
         movieImage.layer.cornerRadius = 15
         movieImage.layer.shadowRadius = 10
         movieImage.layer.shadowColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        constrain(movieImage){
-            $0.height == 30
-            $0.width == 30
-        }
+        movieImage.sizeAnchor(width: 30, height: 30)
         return movieImage
     }()
     
     private lazy var movieLabel: UILabel = {
         let movieLabel = UILabel()
-        movieLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        movieLabel.textColor = .lightGrayTextColor
         movieLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.bold)
         movieLabel.numberOfLines = 0
         return movieLabel
@@ -40,7 +37,7 @@ final class SearchTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        backgroundColor = #colorLiteral(red: 0.337254902, green: 0.337254902, blue: 0.337254902, alpha: 1)
+        backgroundColor = .blackBackgroundColor
     }
     
     required init?(coder aDecoder: NSCoder) {

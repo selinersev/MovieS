@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Cartography
 
 final class DiscoverView: UIView {
     
@@ -28,7 +27,7 @@ final class DiscoverView: UIView {
         collectionView.allowsSelection = true
         collectionView.backgroundColor = .clear
         collectionView.register(DiscoverCollectionViewCell.self,forCellWithReuseIdentifier: "CollectionViewCell")
-        collectionView.backgroundColor = #colorLiteral(red: 0.337254902, green: 0.337254902, blue: 0.337254902, alpha: 1)
+        collectionView.backgroundColor = .blackBackgroundColor
         return collectionView
     }()
 
@@ -36,13 +35,7 @@ final class DiscoverView: UIView {
     init() {
         super.init(frame: .zero)
         addSubview(collectionView)
-        
-        constrain(collectionView){ collectionView in
-            collectionView.leading == collectionView.superview!.leading
-            collectionView.trailing == collectionView.superview!.trailing
-            collectionView.top == collectionView.superview!.top
-            collectionView.bottom == collectionView.superview!.bottom
-        }
+        collectionView.fillSuperview()
     }
     
     required init?(coder aDecoder: NSCoder) {

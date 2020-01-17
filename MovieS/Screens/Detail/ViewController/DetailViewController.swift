@@ -8,7 +8,6 @@
 
 import UIKit
 import Kingfisher
-import FaceAware
 
 final class DetailViewController: UIViewController {
     
@@ -29,9 +28,10 @@ final class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.337254902, green: 0.337254902, blue: 0.337254902, alpha: 1)
         viewSource.populateUI(movie: movie!)
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
 
     // MARK: - Initialization
     init(with movie: Movie) {

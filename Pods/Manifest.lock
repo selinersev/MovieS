@@ -1,24 +1,20 @@
 PODS:
-  - Cartography (3.1.0)
   - FaceAware (1.6.0)
   - Kingfisher (4.10.1)
 
 DEPENDENCIES:
-  - Cartography
   - FaceAware
   - Kingfisher
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - Cartography
+  trunk:
     - FaceAware
     - Kingfisher
 
 SPEC CHECKSUMS:
-  Cartography: 1988b7578871a56c036e7af17195cb2190edf18c
   FaceAware: 7708f7ac2e2521f101dd1462b351c5486eb0a590
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
 
-PODFILE CHECKSUM: f2110dbc4b25f33c08f25c1d5a69bbe20ec039ea
+PODFILE CHECKSUM: ef89bff878b304429eda3efce9d4c133d2ef7b70
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.8.4

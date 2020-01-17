@@ -30,6 +30,8 @@ final class DiscoverViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
+    
     // MARK: - Lifecycle
     override func loadView() {
         view = viewSource
@@ -37,7 +39,7 @@ final class DiscoverViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.337254902, green: 0.337254902, blue: 0.337254902, alpha: 1)
+        view.backgroundColor = .blackBackgroundColor
         setUpNavBar()
         viewModel.fetchGenres { [weak self] data in
             guard self == self else {return}
@@ -49,7 +51,7 @@ final class DiscoverViewController: UIViewController {
     
     func setUpNavBar(){
         self.title = "Discover"
-        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2431372549, green: 0.2431372549, blue: 0.2431372549, alpha: 1)
+        self.navigationController?.navigationBar.barTintColor = .blackBackgroundColor
         self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.2745098039, green: 0.7882352941, blue: 0.7019607843, alpha: 1)
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.2745098039, green: 0.7882352941, blue: 0.7019607843, alpha: 1),
                                                                         NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.bold)]

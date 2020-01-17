@@ -16,7 +16,7 @@ final class URLSessionProvider: ProviderProtocol {
     }
     
     func request<T>(type: T.Type, service: ServiceProtocol, completion: @escaping (NetworkResponse<T>) -> ()) where T: Decodable {
-        let request = URLRequest(service: service) // 1
+        let request = URLRequest(service: service)
         let task = session.dataTask(request: request, completionHandler: { [weak self] data, response, error in
             let httpResponse = response as? HTTPURLResponse
             self?.handleDataResponse(data: data, response: httpResponse, error: error, completion: completion)

@@ -6,7 +6,7 @@
 //  Copyright © 2019 Selin Ersev. All rights reserved.
 //
 
-import Cartography
+import UIKit
 
 final class HomeViewController: UIViewController{
 
@@ -75,6 +75,8 @@ final class HomeViewController: UIViewController{
         guard !(viewModel.state == .isFiltered) else { return }
         viewSource.tableView.reloadData()
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
 
     func setUpNavBar(){
         navigationItem.rightBarButtonItem = viewSource.filterBarButton
@@ -83,7 +85,7 @@ final class HomeViewController: UIViewController{
         viewSource.backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
         navigationItem.searchController = viewSource.searchController
         self.title = "MovieS"
-        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2431372549, green: 0.2431372549, blue: 0.2431372549, alpha: 1)
+        self.navigationController?.navigationBar.barTintColor = .blackBackgroundColor
         self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.2745098039, green: 0.7882352941, blue: 0.7019607843, alpha: 1)
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.2745098039, green: 0.7882352941, blue: 0.7019607843, alpha: 1),
                                                                         NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.bold)]
